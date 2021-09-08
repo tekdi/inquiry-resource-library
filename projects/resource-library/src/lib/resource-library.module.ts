@@ -6,7 +6,7 @@ import { CommonFormElementsModule, DialcodeCursor } from 'common-form-elements-v
 import { SuiModule } from 'ng2-semantic-ui-v9';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { HttpClientModule } from '@angular/common/http';
-import { CollectionEditorLibraryComponent } from './collection-editor-library.component';
+import { ResourceLibraryComponent } from './resource-library.component';
 import { ContentplayerPageComponent } from './components/contentplayer-page/contentplayer-page.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LibraryComponent } from './components/library/library.component';
@@ -30,7 +30,7 @@ import { DialcodeComponent } from './components/dialcode/dialcode.component';
 import { DialcodeService } from './services/dialcode/dialcode.service';
 import { PublishChecklistComponent } from './components/publish-checklist/publish-checklist.component';
 @NgModule({
-  declarations: [CollectionEditorLibraryComponent, ContentplayerPageComponent, QumlplayerPageComponent,
+  declarations: [ResourceLibraryComponent, ContentplayerPageComponent, QumlplayerPageComponent,
     HeaderComponent, LibraryComponent, LibraryFilterComponent, LibraryListComponent,
     LibraryPlayerComponent, ResourceReorderComponent, SkeletonLoaderComponent, TemplateComponent, TelemetryInteractDirective,
     QumlPlayerComponent, DialcodeComponent, PublishChecklistComponent],
@@ -44,4 +44,4 @@ import { PublishChecklistComponent } from './components/publish-checklist/publis
   ],
   exports: []
 })
-export class CollectionEditorLibraryModule { }
+export class ResourceLibraryModule { }
