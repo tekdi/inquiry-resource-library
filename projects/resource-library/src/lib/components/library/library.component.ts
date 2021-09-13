@@ -45,12 +45,15 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
               }
 
   ngOnInit() {
-    const activeNode = this.treeService.getActiveNode();
-    this.selectedUnit = _.get(activeNode, 'data.id');
+    this.editorService.initialize(_.get(this.libraryInput, 'editorConfig'));
+    this.treeService.initialize(_.get(this.libraryInput, 'editorConfig'));
+    this.telemetryService.initializeTelemetry(_.get(this.libraryInput, 'editorConfig'));
+    // const activeNode = this.treeService.getActiveNode();
+    // this.selectedUnit = _.get(activeNode, 'data.id');
     this.collectionId = _.get(this.libraryInput, 'collectionId');
     this.searchFormConfig = _.get(this.libraryInput, 'searchFormConfig');
     this.editorService.fetchCollectionHierarchy(this.collectionId).subscribe((response: any) => {
-      this.collectionhierarcyData = response.result.content;
+      this.collectionhierarcyData = response.result.questionSet;
       this.collectionHierarchy = this.getUnitWithChildren(this.collectionhierarcyData, this.collectionId);
       if (_.has(this.collectionhierarcyData, 'targetFWIds')) {
         this.frameworkId = _.first(_.castArray(this.collectionhierarcyData.targetFWIds));
@@ -90,7 +93,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   setDefaultFilters() {
-    const selectedNode = this.treeService.getActiveNode();
+   /* const selectedNode = this.treeService.getActiveNode();
     let contentTypes = _.flatten(
       _.map(_.get(this.editorService.editorConfig.config, `hierarchy.level${selectedNode.getLevel() - 1}.children`), (val) => {
       return val;
@@ -106,7 +109,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
       // gradeLevel: _.get(this.collectionhierarcyData, 'gradeLevel') || _.get(this.collectionhierarcyData, 'gradeLevelIds'),
       // medium: _.get(this.collectionhierarcyData, 'medium') || _.get(this.collectionhierarcyData, 'mediumIds'),
       // subject: _.get(this.collectionhierarcyData, 'subject') || _.get(this.collectionhierarcyData, 'subjectIds'),
-    });
+    });*/
   }
 
   fetchContentList(filters?, query?) {

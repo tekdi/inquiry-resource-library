@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'lib-resource-library',
-  template: `
-  `,
+  template: ``,
   styles: []
 })
 export class ResourceLibraryComponent implements OnInit {

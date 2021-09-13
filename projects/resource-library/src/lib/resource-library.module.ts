@@ -30,18 +30,27 @@ import { DialcodeComponent } from './components/dialcode/dialcode.component';
 import { DialcodeService } from './services/dialcode/dialcode.service';
 import { PublishChecklistComponent } from './components/publish-checklist/publish-checklist.component';
 @NgModule({
-  declarations: [ResourceLibraryComponent, ContentplayerPageComponent, QumlplayerPageComponent,
+  declarations: [
+    ResourceLibraryComponent, ContentplayerPageComponent, QumlplayerPageComponent,
     HeaderComponent, LibraryComponent, LibraryFilterComponent, LibraryListComponent,
     LibraryPlayerComponent, ResourceReorderComponent, SkeletonLoaderComponent, TemplateComponent, TelemetryInteractDirective,
-    QumlPlayerComponent, DialcodeComponent, PublishChecklistComponent],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule.forChild([]), SuiModule,
-  CommonFormElementsModule, InfiniteScrollModule, HttpClientModule, SunbirdPdfPlayerModule, SunbirdVideoPlayerModule,
-  QumlLibraryModule, CarouselModule],
+    QumlPlayerComponent, DialcodeComponent, PublishChecklistComponent
+  ],
+  imports: [
+    CommonModule, FormsModule, ReactiveFormsModule, RouterModule.forChild([]), SuiModule,
+    CommonFormElementsModule, InfiniteScrollModule, HttpClientModule, SunbirdPdfPlayerModule, SunbirdVideoPlayerModule, 
+    QumlLibraryModule, CarouselModule
+  ],
   providers: [
     CacheService,
     { provide: CacheStorageAbstract, useClass: CacheSessionStorage },
     { provide: DialcodeCursor, useExisting: DialcodeService }
   ],
-  exports: []
+  exports: [
+    ResourceLibraryComponent, ContentplayerPageComponent, QumlplayerPageComponent,
+    HeaderComponent, LibraryComponent, LibraryFilterComponent, LibraryListComponent,
+    LibraryPlayerComponent, ResourceReorderComponent, SkeletonLoaderComponent, TemplateComponent, TelemetryInteractDirective,
+    QumlPlayerComponent, DialcodeComponent, PublishChecklistComponent
+  ]
 })
 export class ResourceLibraryModule { }

@@ -40,7 +40,7 @@ export class LibraryFilterComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.filterFields = this.searchFormConfig;
-    const selectedNode = this.treeService.getActiveNode();
+    /*const selectedNode = this.treeService.getActiveNode();
     let contentTypes = _.flatten(
       _.map(_.get(this.editorService.editorConfig.config, `hierarchy.level${selectedNode.getLevel() - 1}.children`), (val) => {
       return val;
@@ -48,7 +48,8 @@ export class LibraryFilterComponent implements OnInit, OnChanges {
 
     if (_.isEmpty(contentTypes)) {
       contentTypes = _.map(this.helperService.contentPrimaryCategories, 'name');
-    }
+    }*/
+    const contentTypes = _.map(this.helperService.contentPrimaryCategories, 'name');
 
     this.currentFilters = {
       primaryCategory: contentTypes,
