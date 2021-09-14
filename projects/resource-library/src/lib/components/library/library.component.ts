@@ -93,7 +93,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   setDefaultFilters() {
-   /* const selectedNode = this.treeService.getActiveNode();
+    /*const selectedNode = this.treeService.getActiveNode();
     let contentTypes = _.flatten(
       _.map(_.get(this.editorService.editorConfig.config, `hierarchy.level${selectedNode.getLevel() - 1}.children`), (val) => {
       return val;
@@ -101,15 +101,14 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
 
     if (_.isEmpty(contentTypes)) {
       contentTypes = _.map(this.helperService.contentPrimaryCategories, 'name');
-    }
-
+    }*/
     this.defaultFilters = _.pickBy({
-      primaryCategory: contentTypes
-      // board: [_.get(this.collectionhierarcyData, 'board')] || _.get(this.collectionhierarcyData, 'boardIds'),
-      // gradeLevel: _.get(this.collectionhierarcyData, 'gradeLevel') || _.get(this.collectionhierarcyData, 'gradeLevelIds'),
-      // medium: _.get(this.collectionhierarcyData, 'medium') || _.get(this.collectionhierarcyData, 'mediumIds'),
-      // subject: _.get(this.collectionhierarcyData, 'subject') || _.get(this.collectionhierarcyData, 'subjectIds'),
-    });*/
+      primaryCategory: [_.get(this.collectionhierarcyData, 'primaryCategory')] || _.get(this.collectionhierarcyData, 'primaryCategories'),
+      board: [_.get(this.collectionhierarcyData, 'board')] || _.get(this.collectionhierarcyData, 'boardIds'),
+      gradeLevel: _.get(this.collectionhierarcyData, 'gradeLevel') || _.get(this.collectionhierarcyData, 'gradeLevelIds'),
+      medium: _.get(this.collectionhierarcyData, 'medium') || _.get(this.collectionhierarcyData, 'mediumIds'),
+      subject: _.get(this.collectionhierarcyData, 'subject') || _.get(this.collectionhierarcyData, 'subjectIds'),
+    });
   }
 
   fetchContentList(filters?, query?) {
