@@ -7,6 +7,7 @@ import { EditorTelemetryService } from '../../services/telemetry/telemetry.servi
 import { ConfigService } from '../../services/config/config.service';
 import { Router } from '@angular/router';
 import { HelperService } from '../../services/helper/helper.service';
+import {FrameworkService} from '../../services/framework/framework.service';
 
 @Component({
   selector: 'lib-library',
@@ -40,11 +41,13 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
               private treeService: TreeService,
               private toasterService: ToasterService,
               public configService: ConfigService,
+              private frameworkService: FrameworkService,
               private helperService: HelperService) {
               this.pageStartTime = Date.now();
               }
 
   ngOnInit() {
+    this.frameworkService.initialize(_.get(this.libraryInput, 'framework'));
     this.editorService.initialize(_.get(this.libraryInput, 'editorConfig'));
     this.treeService.initialize(_.get(this.libraryInput, 'editorConfig'));
     this.telemetryService.initializeTelemetry(_.get(this.libraryInput, 'editorConfig'));
