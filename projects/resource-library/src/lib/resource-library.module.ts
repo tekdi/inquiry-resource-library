@@ -7,7 +7,7 @@ import { SuiModule } from 'ng2-semantic-ui-v9';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { HttpClientModule } from '@angular/common/http';
 import { ResourceLibraryComponent } from './resource-library.component';
-import { ContentplayerPageComponent } from './components/contentplayer-page/contentplayer-page.component';
+import { ContentPlayerPageComponent } from './components/content-player-page/content-player-page.component';
 import { LibraryComponent } from './components/library/library.component';
 import { LibraryFilterComponent } from './components/library-filter/library-filter.component';
 import { LibraryListComponent } from './components/library-list/library-list.component';
@@ -27,7 +27,7 @@ import { QumlPlayerComponent } from './components/quml-player/quml-player.compon
 import { DialcodeService } from './services/dialcode/dialcode.service';
 @NgModule({
   declarations: [
-    ResourceLibraryComponent, ContentplayerPageComponent, QumlplayerPageComponent,
+    ResourceLibraryComponent, ContentPlayerPageComponent, QumlplayerPageComponent,
     LibraryComponent, LibraryFilterComponent, LibraryListComponent,
     LibraryPlayerComponent, ResourceReorderComponent, SkeletonLoaderComponent, TelemetryInteractDirective,
     QumlPlayerComponent
@@ -43,7 +43,7 @@ import { DialcodeService } from './services/dialcode/dialcode.service';
     { provide: DialcodeCursor, useExisting: DialcodeService }
   ],
   exports: [
-    ResourceLibraryComponent, ContentplayerPageComponent, QumlplayerPageComponent,
+    ResourceLibraryComponent, ContentPlayerPageComponent, QumlplayerPageComponent,
     LibraryComponent, LibraryFilterComponent, LibraryListComponent,
     LibraryPlayerComponent, ResourceReorderComponent, SkeletonLoaderComponent, TelemetryInteractDirective,
     QumlPlayerComponent

@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ViewEncapsul
 import * as _ from 'lodash-es';
 import { Subject } from 'rxjs';
 import { takeUntil, filter, take } from 'rxjs/operators';
-import { TreeService } from '../../services/tree/tree.service';
 import { EditorService } from '../../services/editor/editor.service';
 import { FrameworkService } from '../../services/framework/framework.service';
 import { EditorTelemetryService } from '../../services/telemetry/telemetry.service';
@@ -28,36 +27,16 @@ export class LibraryFilterComponent implements OnInit, OnChanges {
   public telemetryPageId: string;
   private onComponentDestroy$ = new Subject<any>();
   public frameworkDetails: any = {};
-  public currentFilters: any;
   public searchQuery: string;
 
   constructor(private frameworkService: FrameworkService,
               public editorService: EditorService,
               public telemetryService: EditorTelemetryService,
-              public treeService: TreeService,
               public configService: ConfigService,
               private helperService: HelperService) { }
 
   ngOnInit() {
     this.filterFields = this.searchFormConfig;
-    /*const selectedNode = this.treeService.getActiveNode();
-    let contentTypes = _.flatten(
-      _.map(_.get(this.editorService.editorConfig.config, `hierarchy.level${selectedNode.getLevel() - 1}.children`), (val) => {
-      return val;
-    }));
-
-    if (_.isEmpty(contentTypes)) {
-      contentTypes = _.map(this.helperService.contentPrimaryCategories, 'name');
-    }*/
-    const contentTypes = _.map(this.helperService.contentPrimaryCategories, 'name');
-
-    this.currentFilters = {
-      primaryCategory: contentTypes,
-      board: [],
-      medium: [],
-      gradeLevel: [],
-      subject: [],
-    };
     this.setFilterDefaultValues();
     this.fetchFrameWorkDetails();
   }
@@ -106,7 +85,7 @@ export class LibraryFilterComponent implements OnInit, OnChanges {
 
     const index = this.filterFields.findIndex(e => _.get(e, 'code') === 'primaryCategory');
     if (index !== -1) {
-      this.filterFields[index].range = this.currentFilters.primaryCategory;
+      this.filterFields[index].range = this.filterValues.primaryCategory;
     }
 
     this.filterConfig = [{
@@ -157,10 +136,13 @@ export class LibraryFilterComponent implements OnInit, OnChanges {
       query: this.searchQuery
     });
   }
+
   outputData($event) {
   }
+
   onStatusChanges($event) {
   }
+
   valueChanges($event) {
     this.filterValues = $event;
   }

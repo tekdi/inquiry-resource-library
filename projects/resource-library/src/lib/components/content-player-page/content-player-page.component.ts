@@ -7,11 +7,11 @@ declare var $: any;
 
 @Component({
   selector: 'lib-contentplayer-page',
-  templateUrl: './contentplayer-page.component.html',
-  styleUrls: ['./contentplayer-page.component.scss'],
+  templateUrl: './content-player-page.component.html',
+  styleUrls: ['./content-player-page.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ContentplayerPageComponent implements OnInit, OnChanges {
+export class ContentPlayerPageComponent implements OnInit, OnChanges {
   @ViewChild('contentIframe') contentIframe: ElementRef;
   @Input() contentMetadata: any;
   public contentDetails: any;
@@ -64,16 +64,9 @@ export class ContentplayerPageComponent implements OnInit, OnChanges {
       playerElement.onload = (event) => {
         try {
           this.adjustPlayerHeight();
-          // this.playerLoaded = true;
           playerElement.contentWindow.initializePreview(this.playerConfig);
-          // playerElement.addEventListener('renderer:telemetry:event', telemetryEvent => this.generateContentReadEvent(telemetryEvent));
-          // window.frames['contentPlayer'].addEventListener('message', accessEvent => this.generateScoreSubmitEvent(accessEvent), false);
         } catch (err) {
           console.log('loading default player failed', err);
-          // const prevUrls = this.navigationHelperService.history;
-          // if (this.isCdnWorking.toLowerCase() === 'yes' && prevUrls[prevUrls.length - 2]) {
-          //   history.back();
-          // }
         }
       };
     }, 0);

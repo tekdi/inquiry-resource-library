@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, AfterViewInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import * as _ from 'lodash-es';
-import { TreeService } from '../../services/tree/tree.service';
 import { EditorService } from '../../services/editor/editor.service';
 import { ToasterService } from '../../services/toaster/toaster.service';
 import { EditorTelemetryService } from '../../services/telemetry/telemetry.service';
@@ -38,7 +37,6 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(public telemetryService: EditorTelemetryService,
               private editorService: EditorService,
               private router: Router,
-              private treeService: TreeService,
               private toasterService: ToasterService,
               public configService: ConfigService,
               private frameworkService: FrameworkService,
@@ -49,14 +47,12 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.frameworkService.initialize(_.get(this.libraryInput, 'framework'));
     this.editorService.initialize(_.get(this.libraryInput, 'editorConfig'));
-    this.treeService.initialize(_.get(this.libraryInput, 'editorConfig'));
     this.telemetryService.initializeTelemetry(_.get(this.libraryInput, 'editorConfig'));
-    // const activeNode = this.treeService.getActiveNode();
-    // this.selectedUnit = _.get(activeNode, 'data.id');
+
     this.collectionId = _.get(this.libraryInput, 'collectionId');
     this.searchFormConfig = _.get(this.libraryInput, 'searchFormConfig');
     this.editorService.fetchCollectionHierarchy(this.collectionId).subscribe((response: any) => {
-      this.collectionhierarcyData = response.result.questionSet;
+      this.collectionhierarcyData = response.result.questionSet || response.result.content;
       this.collectionHierarchy = this.getUnitWithChildren(this.collectionhierarcyData, this.collectionId);
       if (_.has(this.collectionhierarcyData, 'targetFWIds')) {
         this.frameworkId = _.first(_.castArray(this.collectionhierarcyData.targetFWIds));
@@ -80,8 +76,8 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   back() {
-    this.libraryEmitter.emit({});
-    this.editorService.contentsCountAddedInLibraryPage(true); // contents count updated from library page to zero
+    this.libraryEmitter.emit({action: 'back'});
+    this.editorService.contentsCountAddedInLibraryPage(true);
   }
 
   onFilterChange(event: any) {
@@ -96,21 +92,12 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   setDefaultFilters() {
-    /*const selectedNode = this.treeService.getActiveNode();
-    let contentTypes = _.flatten(
-      _.map(_.get(this.editorService.editorConfig.config, `hierarchy.level${selectedNode.getLevel() - 1}.children`), (val) => {
-      return val;
-    }));
-
-    if (_.isEmpty(contentTypes)) {
-      contentTypes = _.map(this.helperService.contentPrimaryCategories, 'name');
-    }*/
-    this.defaultFilters = _.pickBy({
-      primaryCategory: [_.get(this.collectionhierarcyData, 'primaryCategory')] || _.get(this.collectionhierarcyData, 'primaryCategories'),
-      board: [_.get(this.collectionhierarcyData, 'board')] || _.get(this.collectionhierarcyData, 'boardIds'),
-      gradeLevel: _.get(this.collectionhierarcyData, 'gradeLevel') || _.get(this.collectionhierarcyData, 'gradeLevelIds'),
-      medium: _.get(this.collectionhierarcyData, 'medium') || _.get(this.collectionhierarcyData, 'mediumIds'),
-      subject: _.get(this.collectionhierarcyData, 'subject') || _.get(this.collectionhierarcyData, 'subjectIds'),
+    this.defaultFilters = {};
+    this.searchFormConfig.forEach(config => {
+      const value = _.get(this.collectionhierarcyData, config.code);
+      if (value) {
+        this.defaultFilters[config.code] = Array.isArray(value) ? value : [value];
+      }
     });
   }
 
@@ -159,7 +146,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   generateNodeMeta(node) {
-    const nodeMeta = {
+    return  {
       identifier: node.identifier,
       name: node.name,
       contentType: node.contentType,
@@ -173,7 +160,6 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
       visibility: node.visibility,
       mimeType: node.mimeType
     };
-    return nodeMeta;
   }
 
 
@@ -208,13 +194,14 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
         break;
     }
   }
-sortContentList(status) {
-  this.contentList = this.contentList.sort((a, b) => {
-    return this.editorService.sort(status ? b : a, status ? a :  b, status ? 'name' : 'lastUpdatedOn');
-  });
-  const selectedContentIndex = this.showAddedContent ? 0 : _.findIndex(this.contentList, { isAdded: false });
-  this.selectedContent = this.contentList[selectedContentIndex];
-}
+
+  sortContentList(status) {
+    this.contentList = this.contentList.sort((a, b) => {
+      return this.editorService.sort(status ? b : a, status ? a : b, status ? 'name' : 'lastUpdatedOn');
+    });
+    const selectedContentIndex = this.showAddedContent ? 0 : _.findIndex(this.contentList, {isAdded: false});
+    this.selectedContent = this.contentList[selectedContentIndex];
+  }
 
   openFilter(): void {
     window.scrollTo({
@@ -224,22 +211,26 @@ sortContentList(status) {
     });
     this.isFilterOpen = true;
   }
+
   filterContentList(isContentAdded?) {
-    if (_.isEmpty(this.contentList)) { return; }
+    if (_.isEmpty(this.contentList)) {
+      return;
+    }
     _.forEach(this.contentList, (value, key) => {
       if (value) {
         value.isAdded = _.includes(this.childNodes, value.identifier);
       }
     });
     if (!isContentAdded) {
-      let selectedContentIndex = this.showAddedContent ? 0 : _.findIndex(this.contentList, { isAdded: false });
-      if (this.contentList.length === 1 && this.contentList[0]['isAdded'] === true) {
+      let selectedContentIndex = this.showAddedContent ? 0 : _.findIndex(this.contentList, {isAdded: false});
+      if (this.contentList.length === 1 && this.contentList[0].isAdded === true) {
         this.showAddedContent = true;
         selectedContentIndex = 0;
       }
       this.selectedContent = this.contentList[selectedContentIndex];
     }
   }
+
   ngOnDestroy() {
     this.editorService.contentsCountAddedInLibraryPage(true); // contents count updated from library page to zero
   }

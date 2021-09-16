@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ContentplayerPageComponent } from './contentplayer-page.component';
+import { ContentPlayerPageComponent } from './content-player-page.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { EditorService } from '../../services/editor/editor.service';
@@ -9,8 +9,8 @@ import { of } from 'rxjs';
 import * as _ from 'lodash-es';
 
 describe('ContentplayerPageComponent', () => {
-  let component: ContentplayerPageComponent;
-  let fixture: ComponentFixture<ContentplayerPageComponent>;
+  let component: ContentPlayerPageComponent;
+  let fixture: ComponentFixture<ContentPlayerPageComponent>;
   const contentMetadata = {
     data: {
       metadata: {
@@ -37,7 +37,7 @@ describe('ContentplayerPageComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ HttpClientTestingModule ],
-      declarations: [ ContentplayerPageComponent ],
+      declarations: [ ContentPlayerPageComponent ],
       providers: [EditorService, PlayerService, { provide: ConfigService, useValue: configMockData}],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
@@ -45,7 +45,7 @@ describe('ContentplayerPageComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContentplayerPageComponent);
+    fixture = TestBed.createComponent(ContentPlayerPageComponent);
     component = fixture.componentInstance;
     // fixture.detectChanges();
   });
