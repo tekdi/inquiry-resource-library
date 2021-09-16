@@ -255,23 +255,6 @@ export class EditorService {
     this.questionStream$.next(value);
   }
 
-  async getMaxScore() {
-    const rootNode = this.treeService.getFirstChild();
-    const metadata = _.get(rootNode, 'data.metadata');
-    if (metadata.shuffle) {
-      const childrens = _.map(rootNode.getChildren(), (child) =>  child.data.id);
-      if (metadata.maxQuestions && !_.isEmpty(childrens) ) {
-        const { questions } =  await this.getQuestionList(_.take(childrens, metadata.maxQuestions)).toPromise();
-        const maxScore = this.calculateMaxScore(questions);
-        return maxScore;
-      } else {
-        return rootNode.countChildren();
-      }
-    } else {
-      return metadata.maxQuestions ? metadata.maxQuestions :  rootNode.countChildren();
-    }
-  }
-
   calculateMaxScore(questions: Array<any>) {
    return _.reduce(questions, (sum, question) => {
       return sum + (question.responseDeclaration ? _.get(question, 'responseDeclaration.response1.maxScore') : 1);

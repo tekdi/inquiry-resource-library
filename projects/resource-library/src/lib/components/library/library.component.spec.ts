@@ -119,16 +119,6 @@ describe('LibraryComponent', () => {
     component.showResourceTemplate(data);
     expect(component.openFilter).toHaveBeenCalledWith();
   });
-  it('#showResourceTemplate() should call showResourceTemplate for openHierarchyPopup', () => {
-    const data = {action: 'openHierarchyPopup'};
-    component.showResourceTemplate(data);
-    expect(component.showSelectResourceModal).toBeTruthy();
-  });
-  it('#showResourceTemplate() should call showResourceTemplate for closeHierarchyPopup', () => {
-    const data = {action: 'closeHierarchyPopup'};
-    component.showResourceTemplate(data);
-    expect(component.showSelectResourceModal).toBeFalsy();
-  });
   it('#showResourceTemplate() should call showResourceTemplate for showAddedContent', () => {
     const data = {action: 'showAddedContent', status: true};
     spyOn(component, 'filterContentList');

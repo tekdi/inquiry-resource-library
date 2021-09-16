@@ -12,7 +12,6 @@ import { LibraryComponent } from './components/library/library.component';
 import { LibraryFilterComponent } from './components/library-filter/library-filter.component';
 import { LibraryListComponent } from './components/library-list/library-list.component';
 import { LibraryPlayerComponent } from './components/library-player/library-player.component';
-import { ResourceReorderComponent } from './components/resource-reorder/resource-reorder.component';
 import { SkeletonLoaderComponent } from './components/skeleton-loader/skeleton-loader.component';
 import { QumlplayerPageComponent } from './components/qumlplayer-page/qumlplayer-page.component';
 import {SunbirdPdfPlayerModule} from '@project-sunbird/sunbird-pdf-player-v9';
@@ -29,7 +28,7 @@ import { DialcodeService } from './services/dialcode/dialcode.service';
   declarations: [
     ResourceLibraryComponent, ContentPlayerPageComponent, QumlplayerPageComponent,
     LibraryComponent, LibraryFilterComponent, LibraryListComponent,
-    LibraryPlayerComponent, ResourceReorderComponent, SkeletonLoaderComponent, TelemetryInteractDirective,
+    LibraryPlayerComponent, SkeletonLoaderComponent, TelemetryInteractDirective,
     QumlPlayerComponent
   ],
   imports: [
@@ -43,10 +42,7 @@ import { DialcodeService } from './services/dialcode/dialcode.service';
     { provide: DialcodeCursor, useExisting: DialcodeService }
   ],
   exports: [
-    ResourceLibraryComponent, ContentPlayerPageComponent, QumlplayerPageComponent,
-    LibraryComponent, LibraryFilterComponent, LibraryListComponent,
-    LibraryPlayerComponent, ResourceReorderComponent, SkeletonLoaderComponent, TelemetryInteractDirective,
-    QumlPlayerComponent
+    LibraryComponent
   ]
 })
 export class ResourceLibraryModule { }

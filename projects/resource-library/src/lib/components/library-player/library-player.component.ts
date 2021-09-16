@@ -20,11 +20,9 @@ export class LibraryPlayerComponent implements OnInit {
     }
 
     addToLibrary() {
-        if (this.editorService.checkIfContentsCanbeAdded()) {
-            this.moveEvent.emit({
-                action: 'openHierarchyPopup'
-            });
-        }
+        this.moveEvent.emit({
+            action: 'addContent'
+        });
     }
 
 }

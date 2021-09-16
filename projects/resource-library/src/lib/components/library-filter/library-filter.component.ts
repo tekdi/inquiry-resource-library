@@ -83,10 +83,10 @@ export class LibraryFilterComponent implements OnInit, OnChanges {
       });
     });
 
-    const index = this.filterFields.findIndex(e => _.get(e, 'code') === 'primaryCategory');
+    /*const index = this.filterFields.findIndex(e => _.get(e, 'code') === 'primaryCategory');
     if (index !== -1) {
       this.filterFields[index].range = this.filterValues.primaryCategory;
-    }
+    }*/
 
     this.filterConfig = [{
       name: 'searchForm',
