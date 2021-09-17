@@ -20,7 +20,7 @@
   <!-- Class separator -->
   <div class="sb-library-scroll">
     <div *ngFor="let content of contentList">
-      <div class="sbchapter__item mb-0 d-flex flex-dc" [ngClass]=" {'selected':content.identifier === selectedContent.identifier}"
+      <div class="sbchapter__item mb-0 d-flex flex-dc" [ngClass]=" {'selected': (selectedContent && content.identifier === selectedContent.identifier)}"
        (click)="onContentChange(content)" libTelemetryInteract
        [telemetryInteractEdata]="telemetryService.getTelemetryInteractEdata('on_click_content','click','launch', telemetryService?.telemetryPageId)" 
        [class.d-none]="content.isAdded && !showAddedContent">

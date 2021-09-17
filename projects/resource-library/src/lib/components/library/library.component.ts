@@ -31,11 +31,12 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
     public contentList: any;
     public selectedContent: any;
     public childNodes: any;
+    public targetPrimaryCategories: any;
     collectionHierarchy = [];
     collectionId: string;
     public showAddedContent = false;
     public showLoader = true;
-    public isFilterOpen = false;
+    public isFilterOpen = true;
     collectionhierarcyData: any;
     public defaultFilters: any;
     pageStartTime: any;
@@ -46,8 +47,8 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
                 private router: Router,
                 private toasterService: ToasterService,
                 public configService: ConfigService,
-                private frameworkService: FrameworkService,
-                private helperService: HelperService) {
+                private frameworkService: FrameworkService
+    ) {
         this.pageStartTime = Date.now();
     }
 
@@ -55,6 +56,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
         this.frameworkService.initialize(_.get(this.libraryInput, 'framework'));
         this.editorService.initialize(_.get(this.libraryInput, 'editorConfig'));
         this.telemetryService.initializeTelemetry(_.get(this.libraryInput, 'editorConfig'));
+        this.targetPrimaryCategories = _.get(this.libraryInput, 'targetPrimaryCategories');
 
         this.collectionId = _.get(this.libraryInput, 'collectionId');
         this.searchFormConfig = _.get(this.libraryInput, 'searchFormConfig');
@@ -105,6 +107,9 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
             const value = _.get(this.collectionhierarcyData, config.code);
             if (value && config.code !== 'primaryCategory') {
                 this.defaultFilters[config.code] = Array.isArray(value) ? value : [value];
+            } else if (config.code === 'primaryCategory') {
+                config.default = this.targetPrimaryCategories.map(v => v.name);
+                config.range = this.targetPrimaryCategories;
             }
         });
     }
