@@ -1,6 +1,6 @@
 {
-  "name": "@samagra-x/sunbird-resource-library",
-  "version": "0.0.7",
+  "name": "@project-sunbird/sunbird-resource-library",
+  "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "~9.1.13",
     "@angular/core": "~9.1.13",
