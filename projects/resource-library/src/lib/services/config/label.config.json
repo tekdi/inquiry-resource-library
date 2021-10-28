@@ -174,7 +174,8 @@
        "collaborators": "Collaborators",
        "addCollaborators": "Add Collaborators",
        "manageCollaborators": "Manage Collaborators",
-       "publishchecklistTitle": "Please confirm that ALL the following items are verified (by ticking the check-boxes) before you can publish:"
+       "publishchecklistTitle": "Please confirm that ALL the following items are verified (by ticking the check-boxes) before you can publish:",
+       "marks": "Marks"
       },
     "err":{
        "somethingWentWrong":"Something went wrong",
