@@ -121,7 +121,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
             data: {
                 request: {
                     query: query || '',
-                    filters: _.pickBy({...filters, ...{status: ['Live']}}),
+                    filters: _.pickBy({...filters, ...{status: ['Live', 'Approved']}}),
                     sort_by: {
                         lastUpdatedOn: 'desc'
                     }
