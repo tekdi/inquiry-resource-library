@@ -95,7 +95,7 @@
        "searchPlaceholder":"Search...",
        "addAnImage":"Add an image",
        "name":"Name",
-       "copyRightsAndYear":"Copyright & Yrar",
+       "copyRightsAndYear":"Copyright & Year",
        "license":"License",
        "author":"Author",
        "grade":"Grade",
@@ -223,7 +223,7 @@
          "032": "Cannot add content. reached limit of maximum number of contents allowed.",
          "033": "failed to convert url to blob ",
          "034": "failed to download {FILE_TYPE} file using blob url "
-      }, 
+      },
       "success": {
          "001": "Content is saved",
          "002": "Content is sent for review",
@@ -236,7 +236,7 @@
          "009": "QR code(s) updated successfully",
          "010": "QR code generated.",
          "011": "QR codes downloaded" ,
-         "012": "Collaborators updated successfully" 
+         "012": "Collaborators updated successfully"
       },
       "warning" : {
          "001" : "Errors found in linked QR Codes. Please check and correct.",
