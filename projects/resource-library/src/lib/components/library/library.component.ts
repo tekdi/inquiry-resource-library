@@ -61,7 +61,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
         this.collectionId = _.get(this.libraryInput, 'collectionId');
         this.searchFormConfig = _.get(this.libraryInput, 'searchFormConfig');
         this.editorService.fetchCollectionHierarchy(this.collectionId).subscribe((response: any) => {
-            this.collectionhierarcyData = response.result.questionSet || response.result.content;
+            this.collectionhierarcyData = response.result.Question || response.result.questionSet || response.result.content;
             this.collectionHierarchy = this.getUnitWithChildren(this.collectionhierarcyData, this.collectionId);
             if (_.has(this.collectionhierarcyData, 'targetFWIds')) {
                 this.frameworkId = _.first(_.castArray(this.collectionhierarcyData.targetFWIds));
@@ -133,7 +133,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
             if (!(_.get(response, 'result.count'))) {
                 this.contentList = [];
             } else {
-                this.contentList = _.compact(_.concat(_.get(response.result, 'content'), _.get(response.result, 'QuestionSet')));
+                this.contentList = _.compact(_.concat(_.get(response.result, 'content'), _.get(response.result, 'QuestionSet'), _.get(response.result, 'Question')));
                 this.filterContentList();
             }
         });
