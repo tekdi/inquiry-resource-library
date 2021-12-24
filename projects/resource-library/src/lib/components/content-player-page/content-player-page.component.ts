@@ -19,6 +19,8 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
   public content: any;
   public playerType: string;
   public contentId: string;
+  hierarchy: any;
+
   constructor(private editorService: EditorService, private playerService: PlayerService,
               public configService: ConfigService) { }
 
@@ -53,6 +55,10 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
         }
       }
     });
+
+    if (_.get(this.contentDetails, 'contentData.mimeType') === 'application/vnd.sunbird.question') {
+      this.playerType = 'qml';
+    }
   }
 
   loadDefaultPlayer() {

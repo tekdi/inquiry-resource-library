@@ -86,4 +86,14 @@ export class PlayerService {
         return configuration;
     }
 
+    getQumlPlayerConfig() {
+        const configuration: any = _.cloneDeep(this.editorService.editorConfig);
+        configuration.context.userData = { firstName: configuration.context.user.firstName, lastName: configuration.context.user.lastName },
+        configuration.config = {...configuration.config, sideMenu : this.qumlPlayerSideMenuConfig };
+        configuration.context.mode = 'play';
+        configuration.metadata = {};
+        configuration.data = {};
+        return configuration;
+    }
+
 }

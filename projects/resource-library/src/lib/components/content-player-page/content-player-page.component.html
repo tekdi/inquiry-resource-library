@@ -1,13 +1,18 @@
 <div class="aspectratio" data-ratio="16:9" #aspectRatio>
 
-<iframe #contentIframe id="contentPlayer" *ngIf="playerType === 'default-player'" class="contentViewerIframeShadow" name="contentPlayer"></iframe>
+    <iframe #contentIframe id="contentPlayer" *ngIf="playerType === 'default-player'" class="contentViewerIframeShadow" name="contentPlayer"></iframe>
 
-<sunbird-pdf-player *ngIf="playerType === 'pdf-player'" [playerConfig]="playerConfig"
+    <sunbird-pdf-player *ngIf="playerType === 'pdf-player'" [playerConfig]="playerConfig"
     (playerEvent)="eventHandler($event)" (telemetryEvent)="generateContentReadEvent($event, true)"></sunbird-pdf-player>
 
-<sunbird-video-player *ngIf="playerType === 'video-player'" [playerConfig]="playerConfig"
+    <sunbird-video-player *ngIf="playerType === 'video-player'" [playerConfig]="playerConfig"
 (playerEvent)="eventHandler($event)" (telemetryEvent)="generateContentReadEvent($event, true)"></sunbird-video-player>
+
+    <div class="b-1-100 br-2 mt-5" *ngIf="playerType === 'qml'">
+        <lib-quml-player [questionSetHierarchy]="contentMetadata" [isSingleQuestionPreview]="true" ></lib-quml-player>
+    </div>
 </div>
+
 <div class="ui grid text-font pt-3 bg-white m-0 my-12">
     <div class="four wide column">
         <div class="sb-field-group">
