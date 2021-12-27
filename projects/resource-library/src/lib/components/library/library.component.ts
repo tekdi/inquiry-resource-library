@@ -188,7 +188,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
                 this.openFilter();
                 break;
             case 'addContent':
-                this.libraryEmitter.emit({action: 'add', collectionId: this.selectedContent.identifier});
+                this.libraryEmitter.emit({action: 'add', collectionId: this.selectedContent.identifier, resourceType: this.selectedContent.objectType});
                 break;
             case 'showAddedContent':
                 this.showAddedContent = event.status;
