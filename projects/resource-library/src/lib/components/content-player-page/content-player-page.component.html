@@ -52,6 +52,31 @@
         </div>
     </div>
 
+    <div *ngIf="contentDetails?.contentData?.marks" class="four wide column">
+        <div class="sb-field-group">
+            <label class="sb-color-gray-600">{{configService.labelConfig?.lbl?.marks}}</label>
+            <div class="fs-0-92">{{contentDetails?.contentData?.marks}}</div>
+        </div>
+    </div>
+    <div *ngIf="contentDetails?.contentData?.topic" class="four wide column">
+        <div class="sb-field-group">
+            <label class="sb-color-gray-600">{{configService.labelConfig?.lbl?.topic}}</label>
+            <div class="fs-0-92">{{contentDetails?.contentData?.topic}}</div>
+        </div>
+    </div>
+    <div *ngIf="contentDetails?.contentData?.learningOutcome" class="four wide column">
+        <div class="sb-field-group">
+            <label class="sb-color-gray-600">{{configService.labelConfig?.lbl?.learningOutcome}}</label>
+            <div class="fs-0-92">{{contentDetails?.contentData?.learningOutcome}}</div>
+        </div>
+    </div>
+
+    <div *ngIf="contentDetails?.contentData?.bloomsLevel" class="four wide column">
+        <div class="sb-field-group">
+            <label class="sb-color-gray-600">{{configService.labelConfig?.lbl?.bloomsLevel}}</label>
+            <div class="fs-0-92">{{contentDetails?.contentData?.bloomsLevel}}</div>
+        </div>
+    </div>
     <div class="four wide column">
         <div class="sb-field-group">
             <label class="sb-color-gray-600">{{configService.labelConfig?.lbl?.license}}</label>
