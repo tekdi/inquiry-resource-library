@@ -130,10 +130,17 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
         };
         this.editorService.fetchContentListDetails(option).subscribe((response: any) => {
             this.showLoader = false;
+            const targetObjects = _.uniqBy(this.libraryInput.targetPrimaryCategories, 'targetObjectType');
             if (!(_.get(response, 'result.count'))) {
                 this.contentList = [];
             } else {
-                this.contentList = _.compact(_.concat(_.get(response.result, 'content'), _.get(response.result, 'QuestionSet'), _.get(response.result, 'Question')));
+                this.contentList = [];
+                targetObjects.forEach(targetObject => {
+                    if (targetObject.targetObjectType === 'Content') {
+                        targetObject.targetObjectType = 'content';
+                    }
+                    this.contentList = _.concat(this.contentList, _.get(response.result, targetObject.targetObjectType));
+                });
                 this.filterContentList();
             }
         });
