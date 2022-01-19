@@ -9,6 +9,7 @@ import {EditorService} from '../../services/editor/editor.service';
     styleUrls: ['./library-player.component.scss']
 })
 export class LibraryPlayerComponent implements OnInit {
+    @Input() collectionData;
     @Input() contentListDetails;
     @Output() moveEvent = new EventEmitter<any>();
 
