@@ -26,6 +26,7 @@ import {FrameworkService} from '../../services/framework/framework.service';
 export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input() libraryInput: any;
     @Output() libraryEmitter = new EventEmitter<any>();
+    collectionData: any;
     public searchFormConfig: any;
     public pageId = 'add_from_library';
     public contentList: any;
@@ -59,6 +60,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
         this.targetPrimaryCategories = _.get(this.libraryInput, 'targetPrimaryCategories');
 
         this.collectionId = _.get(this.libraryInput, 'collectionId');
+        this.collectionData = _.get(this.libraryInput, 'collection');
         this.searchFormConfig = _.get(this.libraryInput, 'searchFormConfig');
         this.editorService.fetchCollectionHierarchy(this.collectionId).subscribe((response: any) => {
             this.collectionhierarcyData = response.result.Question || response.result.questionSet || response.result.content;

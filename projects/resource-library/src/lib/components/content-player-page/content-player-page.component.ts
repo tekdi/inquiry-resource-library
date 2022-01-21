@@ -14,6 +14,7 @@ declare var $: any;
 export class ContentPlayerPageComponent implements OnInit, OnChanges {
   @ViewChild('contentIframe') contentIframe: ElementRef;
   @Input() contentMetadata: any;
+  @Input() collectionData: any;
   public contentDetails: any;
   public playerConfig: any;
   public content: any;

@@ -12,6 +12,7 @@ import { EditorService } from '../../services/editor/editor.service';
 export class QumlPlayerComponent implements OnInit {
   qumlPlayerConfig: any;
   @Input() questionSetHierarchy: any;
+  @Input() collectionData: any;
   @Input() isSingleQuestionPreview = false;
   showPreview = false;
   constructor(private configService: ConfigService, private playerService: PlayerService,
@@ -30,11 +31,10 @@ export class QumlPlayerComponent implements OnInit {
     const playerConfig = _.cloneDeep(this.playerService.getQumlPlayerConfig());
     this.qumlPlayerConfig = playerConfig;
     this.qumlPlayerConfig.context.threshold = _.get(this.configService, 'playerConfig.threshold');
-    this.qumlPlayerConfig.metadata = _.cloneDeep(this.questionSetHierarchy);
+    this.qumlPlayerConfig.metadata = _.cloneDeep(this.collectionData);
     if (this.qumlPlayerConfig.metadata) {
-      let childNodes = this.qumlPlayerConfig.metadata.childNodes;
-      childNodes = _.filter(childNodes, (identifier) => !_.endsWith(identifier, '.img'));
-      this.qumlPlayerConfig.metadata.childNodes = childNodes;
+      this.qumlPlayerConfig.metadata.childNodes = [ this.questionSetHierarchy.identifier ];
+      this.qumlPlayerConfig.metadata.children = [ this.questionSetHierarchy ];
       if (this.isSingleQuestionPreview) {
         this.qumlPlayerConfig.context.threshold = 1;
         this.qumlPlayerConfig.metadata.maxQuestions = 1;
