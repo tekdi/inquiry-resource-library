@@ -35,7 +35,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
     public targetPrimaryCategories: any;
     collectionHierarchy = [];
     collectionId: string;
-    public showAddedContent = false;
+    public showAddedContent = true;
     public showLoader = true;
     public isFilterOpen = true;
     collectionhierarcyData: any;
