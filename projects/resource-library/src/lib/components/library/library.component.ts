@@ -141,7 +141,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
                     if (targetObject.targetObjectType === 'Content') {
                         targetObject.targetObjectType = 'content';
                     }
-                    this.contentList = _.concat(this.contentList, _.get(response.result, targetObject.targetObjectType));
+                    this.contentList = _.concat(this.contentList, _.get(response.result, targetObject.targetObjectType, []));
                 });
                 this.filterContentList();
             }
