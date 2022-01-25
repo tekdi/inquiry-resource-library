@@ -35,7 +35,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
     public targetPrimaryCategories: any;
     collectionHierarchy = [];
     collectionId: string;
-    public showAddedContent = false;
+    public showAddedContent = true;
     public showLoader = true;
     public isFilterOpen = true;
     collectionhierarcyData: any;
@@ -141,7 +141,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
                     if (targetObject.targetObjectType === 'Content') {
                         targetObject.targetObjectType = 'content';
                     }
-                    this.contentList = _.concat(this.contentList, _.get(response.result, targetObject.targetObjectType));
+                    this.contentList = _.concat(this.contentList, _.get(response.result, targetObject.targetObjectType, []));
                 });
                 this.filterContentList();
             }
