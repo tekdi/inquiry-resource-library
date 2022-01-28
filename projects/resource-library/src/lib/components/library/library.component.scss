@@ -1,4 +1,7 @@
 .add-to-library {
+    .dynamic-form .list-border {
+      border: 1px solid rgba(34, 36, 38, 0.4) !important;
+    }
     &__header {
       height: 55px;
       line-height: 50px;
