@@ -3,6 +3,18 @@
       height: 55px;
       line-height: 50px;
     }
+    &__footer {
+      width: 100%;
+      padding: 0.25rem 2rem;
+      background-color: var(--white);
+      box-shadow: 0px 2px 15px 1px #C1C1C1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      bottom: 0px;
+      z-index: 9999;
+    }
     &__no-result {
       display: flex;
       flex-direction: column;
