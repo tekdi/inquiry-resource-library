@@ -11,19 +11,12 @@ import {EditorService} from '../../services/editor/editor.service';
 export class LibraryPlayerComponent implements OnInit {
     @Input() collectionData;
     @Input() contentListDetails;
-    @Output() moveEvent = new EventEmitter<any>();
 
     constructor(public telemetryService: EditorTelemetryService, public editorService: EditorService,
                 public configService: ConfigService) {
     }
 
     ngOnInit() {
-    }
-
-    addToLibrary() {
-        this.moveEvent.emit({
-            action: 'addContent'
-        });
     }
 
 }

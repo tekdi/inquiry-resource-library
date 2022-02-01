@@ -69,6 +69,7 @@
        "addFromLibrary":"Add from Library",
        "showContentAddedToCollection":"Show content added to collection",
        "addContent":"Add content",
+       "addSelectedItems": "All selected items will be added to the Collection",
        "sortBy":"Sort By",
        "sortlabel":"A - Z",
        "viewOnOrigin":"View Content on consumption",

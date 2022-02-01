@@ -31,6 +31,8 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
     public pageId = 'add_from_library';
     public contentList: any;
     public selectedContent: any;
+    public selectedContentList: any[] = [];
+    public contentType: string;
     public childNodes: any;
     public targetPrimaryCategories: any;
     collectionHierarchy = [];
@@ -187,17 +189,24 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
 
-    onContentChangeEvent(event: any) {
-        this.selectedContent = event.content;
+    onChangeEvent(event: any) {
+        switch (event.type) {
+          case 'content':
+            this.selectedContent = event.content;
+            break;
+          case 'contentList':
+            this.selectedContentList = event.contentList;
+            this.contentType = event.contentType;
+            break;
+          default:
+            break;
+        }
     }
 
     showResourceTemplate(event) {
         switch (event.action) {
             case 'showFilter':
                 this.openFilter();
-                break;
-            case 'addContent':
-                this.libraryEmitter.emit({action: 'add', collectionId: this.selectedContent.identifier, resourceType: this.selectedContent.objectType});
                 break;
             case 'showAddedContent':
                 this.showAddedContent = event.status;
@@ -209,6 +218,14 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
             default:
                 break;
         }
+    }
+
+    addtolibrary() {
+      this.libraryEmitter.emit({
+        action: 'addBulk',
+        collectionIds: this.selectedContentList,
+        resourceType: this.contentType
+      });
     }
 
     sortContentList(status) {
