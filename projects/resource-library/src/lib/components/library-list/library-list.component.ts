@@ -15,7 +15,7 @@ export class LibraryListComponent implements OnInit {
     @Output() onChangeEvent = new EventEmitter<any>();
     @Output() moveEvent = new EventEmitter<any>();
     @Input() selectedContent: any;
-    public selectedContentList: any[] = [];
+    @Input() selectedContentList: any[] = [];
     public sortContent = false;
 
     constructor(public editorService: EditorService, public telemetryService: EditorTelemetryService,
