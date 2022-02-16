@@ -21,7 +21,7 @@
   </div>
 <!-- Filter -->
   <lib-library-filter *ngIf="!showLoader" [filterValues]="defaultFilters" [searchFormConfig]="searchFormConfig" [filterOpenStatus]="isFilterOpen" [frameworkId]="frameworkId" (filterChangeEvent)="onFilterChange($event);"></lib-library-filter>
-  <div class="ui container sb-container min-h-500" *ngIf="!showLoader && contentList?.length">
+  <div class="ui container sb-container min-h-500 mb-30" *ngIf="!showLoader && showListing && contentList?.length">
     <!-- Player Section -->
     <div class="sb-g add-to-library__toc-player">
       <!-- Left Sidebar for cards -->
@@ -32,15 +32,6 @@
       <section class="sb-g-col-xs-12 sb-g-col-md-8 sb-g-col-lg-8 relative position ml-24">
           <lib-library-player [collectionData]="collectionData" [contentListDetails]="selectedContent"></lib-library-player>
       </section>
-    </div>
-  </div>
-  <div *ngIf="!showLoader" class="add-to-library__footer mt-30">
-    <div class="title sb-color-primary font-weight-bold fs-1">({{selectedContentList.length}}) content selected</div>
-    <div class="d-flex flex-ai-center">
-      <small class="sb-color-gray-400 d-block">{{configService.labelConfig?.lbl?.addSelectedItems}}</small>
-      <button class="sb-btn sb-btn-sm sb-btn-dark-green sb-left-icon-btn font-weight-bold text-inherit m-15 p-12" (click)="addtolibrary()" [disabled]="!selectedContentList.length">
-        {{configService.labelConfig?.lbl?.addContent}}
-      </button>
     </div>
   </div>
 </div>
@@ -74,5 +65,15 @@
       <button class="sb-btn sb-btn-secondary sb-btn-normal mt-16" libTelemetryInteract
       [telemetryInteractEdata]="telemetryService.getTelemetryInteractEdata('change_filter','click','launch', telemetryService?.telemetryPageId)" (click)="openFilter();">{{configService.labelConfig?.lbl?.changeFilter}}</button>
     </div>
+  </div>
+</div>
+
+<div *ngIf="!showLoader" class="add-to-library__footer">
+  <div class="title sb-color-primary font-weight-bold fs-1">({{selectedContentList.length}}) content selected</div>
+  <div class="d-flex flex-ai-center">
+    <small class="sb-color-gray-400 d-block">{{configService.labelConfig?.lbl?.addSelectedItems}}</small>
+    <button class="sb-btn sb-btn-sm sb-btn-dark-green sb-left-icon-btn font-weight-bold text-inherit m-15 p-12" (click)="addtolibrary()" [disabled]="!selectedContentList.length">
+      {{configService.labelConfig?.lbl?.addContent}}
+    </button>
   </div>
 </div>

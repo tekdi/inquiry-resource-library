@@ -38,6 +38,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
     collectionHierarchy = [];
     collectionId: string;
     public showAddedContent = true;
+    public showListing = true;
     public showLoader = true;
     public isFilterOpen = true;
     collectionhierarcyData: any;
@@ -94,6 +95,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     onFilterChange(event: any) {
+        this.selectedContentList = []
         switch (event.action) {
             case 'filterDataChange':
                 this.fetchContentList(event.filters, event.query);
@@ -120,20 +122,23 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
 
     fetchContentList(filters?, query?) {
         filters = filters || this.defaultFilters;
+        const primaryCategories = _.map(_.uniqBy(this.libraryInput.targetPrimaryCategories, 'name'), 'name');
         const option = {
             url: 'composite/v3/search',
             data: {
                 request: {
                     query: query || '',
-                    filters: _.pickBy({...filters, ...{status: ['Live', 'Approved']}}),
+                    filters: _.pickBy({...filters, ...{primaryCategory: primaryCategories, status: ['Live', 'Approved']}}),
                     sort_by: {
                         lastUpdatedOn: 'desc'
                     }
                 }
             }
         };
+        this.showListing = false;
         this.editorService.fetchContentListDetails(option).subscribe((response: any) => {
             this.showLoader = false;
+            this.showListing = true;
             const targetObjects = _.uniqBy(this.libraryInput.targetPrimaryCategories, 'targetObjectType');
             if (!(_.get(response, 'result.count'))) {
                 this.contentList = [];
