@@ -45,6 +45,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
     public defaultFilters: any;
     pageStartTime: any;
     public frameworkId: any;
+    enableAddContentButton = true;
 
     constructor(public telemetryService: EditorTelemetryService,
                 private editorService: EditorService,
@@ -266,6 +267,19 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
                 selectedContentIndex = 0;
             }
             this.selectedContent = this.contentList[selectedContentIndex];
+        }
+    }
+
+    checkContentAdd(event) {
+        switch (event.action) {
+            case 'enableAddContent':
+                this.enableAddContentButton = true;
+                break;
+            case 'disableAddContent':
+                this.enableAddContentButton = false;
+                break;
+            default:
+                break;
         }
     }
 

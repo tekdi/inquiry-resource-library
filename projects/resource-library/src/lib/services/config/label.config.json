@@ -227,7 +227,8 @@
          "031": "Cannot create question. reached limit of maximum number of questions allowed.",
          "032": "Cannot add content. reached limit of maximum number of contents allowed.",
          "033": "failed to convert url to blob ",
-         "034": "failed to download {FILE_TYPE} file using blob url "
+         "034": "failed to download {FILE_TYPE} file using blob url ",
+         "035": "Cannot add question. reached limit of maximum number of questions allowed."
       },
       "success": {
          "001": "Content is saved",
