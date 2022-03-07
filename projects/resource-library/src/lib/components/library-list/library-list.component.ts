@@ -18,19 +18,18 @@ export class LibraryListComponent implements OnInit {
     @Output() addContentEvent = new EventEmitter<any>();
     @Input() selectedContent: any;
     @Input() selectedContentList: any[] = [];
+    @Input() existingContentCounts: number;
     public sortContent = false;
-    addedContentIds = [];
+    hasMaxQuestionLimit = false;
 
     constructor(public editorService: EditorService, public telemetryService: EditorTelemetryService,
                 public configService: ConfigService, private toasterService: ToasterService) {
     }
 
     ngOnInit() {
-        _.forEach(this.contentList,(content) => {
-            if (_.has(content, 'isAdded') && (_.get(content, 'isAdded') === true)) {
-                this.addedContentIds.push(content.identifier);
-            }
-        });
+        if (_.has(this.editorService.editorConfig, 'config.questionSet.maxQuestionsLimit')) {
+            this.hasMaxQuestionLimit = true;
+        }
     }
 
     onContentChange(selectedContent: any) {
@@ -72,10 +71,12 @@ export class LibraryListComponent implements OnInit {
           contentList: this.selectedContentList,
           contentType: content.objectType
         });
-        if (!this.checkIfContentsCanbeAdded()) {
-            this.addContentEvent.emit({action: 'disableAddContent'});
-        } else {
-            this.addContentEvent.emit({action: 'enableAddContent'});
+        if (this.hasMaxQuestionLimit) {
+            if (!this.checkIfContentsCanbeAdded()) {
+                this.addContentEvent.emit({action: 'disableAddContent'});
+            } else {
+                this.addContentEvent.emit({action: 'enableAddContent'});
+            }
         }
       }
 
@@ -87,9 +88,8 @@ export class LibraryListComponent implements OnInit {
         if (_.get(this.editorService.editorConfig, 'config.objectType') === 'QuestionSet') {
             config.errorMessage = _.get(this.configService, 'labelConfig.messages.error.035');
             config.maxLimit = _.get(this.editorService.editorConfig, 'config.questionSet.maxQuestionsLimit');
-            console.log('addedContentIds', this.addedContentIds);
-            const childrenCount = this.addedContentIds.length + this.selectedContentList.length;
-            if (childrenCount >= config.maxLimit) {
+            const childrenCount = this.existingContentCounts + this.selectedContentList.length;
+            if (childrenCount > config.maxLimit) {
                 this.toasterService.error(config.errorMessage);
                 return false;
             } else {

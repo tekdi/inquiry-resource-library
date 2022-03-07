@@ -20,14 +20,18 @@
     </div>
   </div>
 <!-- Filter -->
-  <lib-library-filter *ngIf="!showLoader" [filterValues]="defaultFilters" [searchFormConfig]="searchFormConfig" [filterOpenStatus]="isFilterOpen" [frameworkId]="frameworkId" (filterChangeEvent)="onFilterChange($event);"></lib-library-filter>
+  <lib-library-filter *ngIf="!showLoader" [filterValues]="defaultFilters" [searchFormConfig]="searchFormConfig"
+  [filterOpenStatus]="isFilterOpen" [frameworkId]="frameworkId" [targetPrimaryCategories]="targetPrimaryCategories"
+  (filterChangeEvent)="onFilterChange($event);">
+  </lib-library-filter>
   <div class="ui container sb-container min-h-500 mb-30" *ngIf="!showLoader && showListing && contentList?.length">
     <!-- Player Section -->
     <div class="sb-g add-to-library__toc-player">
       <!-- Left Sidebar for cards -->
       <section class="sb-g-col-xs-12 sb-g-col-md-4 sb-g-col-lg-4">
-          <lib-library-list (onChangeEvent)= "onChangeEvent($event)" [selectedContent] = "selectedContent" [contentList]="contentList"
-          [showAddedContent]="showAddedContent" (moveEvent)="showResourceTemplate($event)" (addContentEvent)="checkContentAdd($event)">
+          <lib-library-list (onChangeEvent)="onChangeEvent($event)" [selectedContent] ="selectedContent"
+          [contentList]="contentList" [showAddedContent]="showAddedContent" [existingContentCounts]="existingContentCounts"
+          (moveEvent)="showResourceTemplate($event)" (addContentEvent)="checkContentAdd($event)">
           </lib-library-list>
       </section>
       <!-- Right Player Sections -->
