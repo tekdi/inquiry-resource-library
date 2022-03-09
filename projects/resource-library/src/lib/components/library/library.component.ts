@@ -34,7 +34,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
     public selectedContentList: any[] = [];
     public contentType: string;
     public childNodes: any;
-    public targetPrimaryCategories: any;
+    public targetPrimaryCategories: any[] = [];
     collectionHierarchy = [];
     collectionId: string;
     public showAddedContent = true;
@@ -63,7 +63,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
         this.frameworkService.initialize(_.get(this.libraryInput, 'framework'));
         this.editorService.initialize(_.get(this.libraryInput, 'editorConfig'));
         this.telemetryService.initializeTelemetry(_.get(this.libraryInput, 'editorConfig'));
-        this.targetPrimaryCategories = _.map(_.uniqBy(this.libraryInput.targetPrimaryCategories, 'name'), 'name');
+        this.setPrimaryCategory();
         this.existingContentCounts = this.libraryInput.existingcontentCounts;
         this.collectionId = _.get(this.libraryInput, 'collectionId');
         this.collectionData = _.get(this.libraryInput, 'collection');
@@ -83,6 +83,17 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
         }, err => {
             this.toasterService.error(_.get(this.configService, 'labelConfig.messages.error.001'));
         });
+    }
+
+    setPrimaryCategory() {
+        if (!_.isUndefined(this.libraryInput.targetPrimaryCategories) &&
+        _.isArray(this.libraryInput.targetPrimaryCategories)) {
+            _.forEach(this.libraryInput.targetPrimaryCategories, (primaryCategory) => {
+                if (_.has(primaryCategory, 'name')) {
+                    this.targetPrimaryCategories.push(primaryCategory.name);
+                }
+            });
+        }
     }
 
     ngAfterViewInit() {
