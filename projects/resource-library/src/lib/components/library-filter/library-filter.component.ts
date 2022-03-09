@@ -20,6 +20,7 @@ export class LibraryFilterComponent implements OnInit, OnChanges {
   @Input() filterOpenStatus: boolean;
   @Input() searchFormConfig: any;
   @Input() frameworkId: any;
+  @Input() targetPrimaryCategories;
   @Output() filterChangeEvent: EventEmitter<any> = new EventEmitter();
   public filterConfig: any;
   public isFilterShow = false;
@@ -50,6 +51,7 @@ export class LibraryFilterComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
+    this.setFilterDefaultValues();
     this.isFilterShow = this.filterOpenStatus;
   }
 
@@ -108,20 +110,18 @@ export class LibraryFilterComponent implements OnInit, OnChanges {
   }
 
   resetFilter() {
-    this.filterValues = {
-      primaryCategory: _.map(this.helperService.contentPrimaryCategories, 'name')
-    };
     this.searchQuery = '';
     _.forEach(this.filterFields, (field) => {
-      field.default = '';
+      if (field.dataType === 'list') {
+        field.default = [];
+      } else {
+        field.default = '';
+      }
     });
-
-    this.filterConfig = null;
-    this.filterConfig = [{
-      name: 'searchForm',
-      fields: _.cloneDeep(this.filterFields)
-    }];
-
+    this.filterValues = {
+      primaryCategory: this.targetPrimaryCategories,
+    };
+    this.setFilterDefaultValues();
     this.emitApplyFilter();
   }
 

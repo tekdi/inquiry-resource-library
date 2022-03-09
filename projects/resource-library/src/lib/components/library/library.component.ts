@@ -34,7 +34,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
     public selectedContentList: any[] = [];
     public contentType: string;
     public childNodes: any;
-    public targetPrimaryCategories: any;
+    public targetPrimaryCategories: any[] = [];
     collectionHierarchy = [];
     collectionId: string;
     public showAddedContent = true;
@@ -45,6 +45,9 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
     public defaultFilters: any;
     pageStartTime: any;
     public frameworkId: any;
+    enableAddContentButton = true;
+    filterInput: any;
+    existingContentCounts: number;
 
     constructor(public telemetryService: EditorTelemetryService,
                 private editorService: EditorService,
@@ -60,8 +63,8 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
         this.frameworkService.initialize(_.get(this.libraryInput, 'framework'));
         this.editorService.initialize(_.get(this.libraryInput, 'editorConfig'));
         this.telemetryService.initializeTelemetry(_.get(this.libraryInput, 'editorConfig'));
-        this.targetPrimaryCategories = _.get(this.libraryInput, 'targetPrimaryCategories');
-
+        this.setPrimaryCategory();
+        this.existingContentCounts = this.libraryInput.existingcontentCounts;
         this.collectionId = _.get(this.libraryInput, 'collectionId');
         this.collectionData = _.get(this.libraryInput, 'collection');
         this.searchFormConfig = _.get(this.libraryInput, 'searchFormConfig');
@@ -80,6 +83,17 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
         }, err => {
             this.toasterService.error(_.get(this.configService, 'labelConfig.messages.error.001'));
         });
+    }
+
+    setPrimaryCategory() {
+        if (!_.isUndefined(this.libraryInput.targetPrimaryCategories) &&
+        _.isArray(this.libraryInput.targetPrimaryCategories)) {
+            _.forEach(this.libraryInput.targetPrimaryCategories, (primaryCategory) => {
+                if (_.has(primaryCategory, 'name')) {
+                    this.targetPrimaryCategories.push(primaryCategory.name);
+                }
+            });
+        }
     }
 
     ngAfterViewInit() {
@@ -109,26 +123,29 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
 
     setDefaultFilters() {
         this.defaultFilters = {};
+        if (_.isUndefined(_.find(this.searchFormConfig, {code: 'primaryCategory'}))) {
+            this.defaultFilters['primaryCategory'] = this.targetPrimaryCategories;
+        }
         this.searchFormConfig.forEach(config => {
             const value = _.get(this.collectionhierarcyData, config.code);
             if (value && config.code !== 'primaryCategory') {
                 this.defaultFilters[config.code] = Array.isArray(value) ? value : [value];
             } else if (config.code === 'primaryCategory') {
-                config.default = this.targetPrimaryCategories.map(v => v.name);
+                config.default = this.targetPrimaryCategories;
                 config.range = this.targetPrimaryCategories;
+                this.defaultFilters['primaryCategory'] = this.targetPrimaryCategories;
             }
         });
     }
 
     fetchContentList(filters?, query?) {
         filters = filters || this.defaultFilters;
-        const primaryCategories = _.map(_.uniqBy(this.libraryInput.targetPrimaryCategories, 'name'), 'name');
         const option = {
             url: 'composite/v3/search',
             data: {
                 request: {
                     query: query || '',
-                    filters: _.pickBy({...filters, ...{primaryCategory: primaryCategories, status: ['Live', 'Approved']}}),
+                    filters: _.pickBy({ ...filters, ...{ status: ['Live', 'Approved'] }}),
                     sort_by: {
                         lastUpdatedOn: 'desc'
                     }
@@ -266,6 +283,19 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
                 selectedContentIndex = 0;
             }
             this.selectedContent = this.contentList[selectedContentIndex];
+        }
+    }
+
+    checkContentAdd(event) {
+        switch (event.action) {
+            case 'enableAddContent':
+                this.enableAddContentButton = true;
+                break;
+            case 'disableAddContent':
+                this.enableAddContentButton = false;
+                break;
+            default:
+                break;
         }
     }
 
