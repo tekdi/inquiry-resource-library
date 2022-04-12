@@ -16,7 +16,6 @@ import {ConfigService} from '../../services/config/config.service';
 import {Router} from '@angular/router';
 import {HelperService} from '../../services/helper/helper.service';
 import {FrameworkService} from '../../services/framework/framework.service';
-
 @Component({
     selector: 'lib-library',
     templateUrl: './library.component.html',
@@ -35,6 +34,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
     public contentType: string;
     public childNodes: any;
     public targetPrimaryCategories: any[] = [];
+    public targetObjectTypes: any[] = [];
     collectionHierarchy = [];
     collectionId: string;
     public showAddedContent = true;
@@ -92,6 +92,14 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
                 if (_.has(primaryCategory, 'name')) {
                     this.targetPrimaryCategories.push(primaryCategory.name);
                 }
+                if (_.has(primaryCategory, 'targetObjectType')) {
+                    if (!_.includes(this.targetObjectTypes, primaryCategory.targetObjectType)) {
+                        this.targetObjectTypes.push(primaryCategory.targetObjectType);
+                    }
+                }
+                if (_.isEmpty(this.targetObjectTypes)) {
+                    this.targetObjectTypes = ['Content', 'Question'];
+                }
             });
         }
     }
@@ -125,6 +133,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
         this.defaultFilters = {};
         if (_.isUndefined(_.find(this.searchFormConfig, {code: 'primaryCategory'}))) {
             this.defaultFilters['primaryCategory'] = this.targetPrimaryCategories;
+            this.defaultFilters['objectType'] = this.targetObjectTypes;
         }
         this.searchFormConfig.forEach(config => {
             const value = _.get(this.collectionhierarcyData, config.code);
@@ -134,6 +143,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
                 config.default = this.targetPrimaryCategories;
                 config.range = this.targetPrimaryCategories;
                 this.defaultFilters['primaryCategory'] = this.targetPrimaryCategories;
+                this.defaultFilters['objectType'] = this.targetObjectTypes;
             }
         });
     }
@@ -145,7 +155,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
             data: {
                 request: {
                     query: query || '',
-                    filters: _.pickBy({ ...filters, ...{ status: ['Live', 'Approved'] }}),
+                    filters: _.pickBy({ ...filters, ...{ status: ['Live'], objectType: this.targetObjectTypes }}),
                     sort_by: {
                         lastUpdatedOn: 'desc'
                     }
