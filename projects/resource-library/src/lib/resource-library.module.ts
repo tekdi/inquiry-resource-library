@@ -22,13 +22,13 @@ import {CacheService} from 'ng2-cache-service';
 import {CacheStorageAbstract} from 'ng2-cache-service/dist/src/services/storage/cache-storage-abstract.service';
 import {CacheSessionStorage} from 'ng2-cache-service/dist/src/services/storage/session-storage/cache-session-storage.service';
 import {QumlPlayerComponent} from './components/quml-player/quml-player.component';
-
+import { InterpolatePipe } from './pipes/interpolate/interpolate.pipe';
 @NgModule({
     declarations: [
         ResourceLibraryComponent, ContentPlayerPageComponent,
         LibraryComponent, LibraryFilterComponent, LibraryListComponent,
         LibraryPlayerComponent, SkeletonLoaderComponent, TelemetryInteractDirective,
-        QumlPlayerComponent
+        QumlPlayerComponent, InterpolatePipe
     ],
     imports: [
         CommonModule, FormsModule, ReactiveFormsModule, RouterModule.forChild([]), SuiModule,

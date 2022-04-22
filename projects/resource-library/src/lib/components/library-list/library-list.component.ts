@@ -19,6 +19,7 @@ export class LibraryListComponent implements OnInit {
     @Input() selectedContent: any;
     @Input() selectedContentList: any[] = [];
     @Input() existingContentCounts: number;
+    @Input() libraryLabels;
     public sortContent = false;
     hasMaxQuestionLimit = false;
 

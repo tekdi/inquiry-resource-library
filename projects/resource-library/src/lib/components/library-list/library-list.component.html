@@ -1,6 +1,6 @@
 <div class="sbtoc-container pr-8 mt-20">
   <div class="title sb-color-primary font-weight-bold fs-1">
-    Showing ({{contentList?.length}}) most relevant content
+    Showing ({{contentList?.length}}) most relevant {{ libraryLabels?.itemType }}
   </div>
   <div class="d-flex flex-w-wrap flex-jc-space-between flex-ai-baseline mb-15">
     <div>
@@ -8,7 +8,8 @@
       <sui-checkbox class="toggle" libTelemetryInteract
       [telemetryInteractEdata]="telemetryService.getTelemetryInteractEdata('show_content_added_to_collection','click','launch', telemetryService?.telemetryPageId, {showAddedContent: !showAddedContent})"
        [(ngModel)]="showAddedContent" (checkChange)="onShowAddedContentChange();"></sui-checkbox>
-        <small class="d-block mt-5 fs-0785"> {{configService.labelConfig?.lbl?.showContentAddedToCollection}}</small>
+        <small class="d-block mt-5 fs-0785"> {{configService.labelConfig?.lbl?.showContentAddedToCollection | interpolate: '{ITEM_TYPE}':
+          libraryLabels?.itemType | interpolate: '{COLLECTION}': libraryLabels?.collectionType}}</small>
     </div>
     <div class="sb-w-75">
       <label class="d-block font-weight-normal fs-0785">{{configService.labelConfig?.lbl?.sortBy}}</label>
@@ -41,7 +42,7 @@
       <div class="textbookBtnLink absolute"  [hidden]="!content.isAdded">
         <button type="button" class="sb-btn sb-btn-normal sb-btn-link sb-btn-hover-none
          sb-btn-link-secondary sb-left-icon-btn fs-0-785"><i class="circle check icon m-0"></i>
-         {{configService.labelConfig?.lbl?.addedToCollection}}</button>
+         {{configService.labelConfig?.lbl?.addedToCollection | interpolate: '{COLLECTION}': libraryLabels?.collectionType}}</button>
       </div>
       </div>
     </div>

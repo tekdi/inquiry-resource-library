@@ -49,6 +49,10 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
     enableAddContentButton = true;
     filterInput: any;
     existingContentCounts: number;
+    public defaultLibraryLabels = {
+        itemType: 'content',
+        collectionType: 'collection'
+    };
 
     constructor(public telemetryService: EditorTelemetryService,
                 private editorService: EditorService,
@@ -64,6 +68,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
         this.frameworkService.initialize(_.get(this.libraryInput, 'framework'));
         this.editorService.initialize(_.get(this.libraryInput, 'editorConfig'));
         this.telemetryService.initializeTelemetry(_.get(this.libraryInput, 'editorConfig'));
+        this.setLibraryLabel();
         this.setPrimaryCategory();
         this.existingContentCounts = this.libraryInput.existingcontentCounts;
         this.collectionId = _.get(this.libraryInput, 'collectionId');
@@ -84,6 +89,18 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
         }, err => {
             this.toasterService.error(_.get(this.configService, 'labelConfig.messages.error.001'));
         });
+    }
+
+    setLibraryLabel() {
+        if (_.has(this.libraryInput, 'libraryLabels') &&
+        !_.isUndefined(this.libraryInput, 'libraryLabels')) {
+            if (this.libraryInput.libraryLabels.itemType) {
+                this.defaultLibraryLabels.itemType = this.libraryInput.libraryLabels.itemType;
+            }
+            if (this.libraryInput.libraryLabels.collectionType) {
+                this.defaultLibraryLabels.collectionType = this.libraryInput.libraryLabels.collectionType;
+            }
+        }
     }
 
     setPrimaryCategory() {
