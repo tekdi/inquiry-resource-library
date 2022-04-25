@@ -6,7 +6,8 @@
     <div>
       <small class="sb-color-gray-200 d-block pb-10">{{configService.labelConfig?.lbl?.selectContentToAdd}}</small>
       <sui-checkbox class="toggle" libTelemetryInteract
-      [telemetryInteractEdata]="telemetryService.getTelemetryInteractEdata('show_content_added_to_collection','click','launch', telemetryService?.telemetryPageId, {showAddedContent: !showAddedContent})"
+      [telemetryInteractEdata]="telemetryService.getTelemetryInteractEdata('show_' + libraryLabels?.itemType + '_added_to_' + (libraryLabels?.collectionType).split(' ').join('_') ,'click','launch', telemetryService?.telemetryPageId,
+      {showAddedItem: !showAddedContent})"
        [(ngModel)]="showAddedContent" (checkChange)="onShowAddedContentChange();"></sui-checkbox>
         <small class="d-block mt-5 fs-0785"> {{configService.labelConfig?.lbl?.showContentAddedToCollection | interpolate: '{ITEM_TYPE}':
           libraryLabels?.itemType | interpolate: '{COLLECTION}': libraryLabels?.collectionType}}</small>
@@ -14,7 +15,7 @@
     <div class="sb-w-75">
       <label class="d-block font-weight-normal fs-0785">{{configService.labelConfig?.lbl?.sortBy}}</label>
       <div (click)="sortContentList();" libTelemetryInteract
-      [telemetryInteractEdata]="telemetryService.getTelemetryInteractEdata('sort_by','click','launch', telemetryService?.telemetryPageId, {sortContent: !sortContent})"
+      [telemetryInteractEdata]="telemetryService.getTelemetryInteractEdata('sort_by','click','launch', telemetryService?.telemetryPageId, {sortItem: !sortContent})"
        [ngClass]="{'sb-btn-outline-primary': sortContent}" class="sb-btn sb-btn-outline-gray sb-btn-normal ripple">{{configService.labelConfig?.lbl?.sortlabel}}</div>
 </div>
   </div>
@@ -24,7 +25,7 @@
       <div class="sbchapter__item mb-0 d-flex flex-dc"
        [ngClass]="{'selected': (selectedContent && content.identifier === selectedContent.identifier), 'greyed-out': content.isAdded}"
        (click)="onContentChange(content)" libTelemetryInteract
-       [telemetryInteractEdata]="telemetryService.getTelemetryInteractEdata('on_click_content','click','launch', telemetryService?.telemetryPageId)"
+       [telemetryInteractEdata]="telemetryService.getTelemetryInteractEdata('on_click_' + libraryLabels?.itemType,'click','launch', telemetryService?.telemetryPageId)"
        [class.d-none]="content.isAdded && !showAddedContent">
       <!-- <div class="sbchapter__img"><img src="./assets/images/book.png" /></div> -->
       <div class="d-flex w-80 mr-8 ml-8">
