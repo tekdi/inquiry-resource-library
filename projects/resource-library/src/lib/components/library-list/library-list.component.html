@@ -4,7 +4,7 @@
   </div>
   <div class="d-flex flex-w-wrap flex-jc-space-between flex-ai-baseline mb-15">
     <div>
-      <small class="sb-color-gray-200 d-block pb-10">{{configService.labelConfig?.lbl?.selectContentToAdd}}</small>
+      <small class="sb-color-gray-200 d-block pb-10">{{configService.labelConfig?.lbl?.selectContentToAdd | interpolate: '{ITEM_TYPE}': libraryLabels?.itemType}}</small>
       <sui-checkbox class="toggle" libTelemetryInteract
       [telemetryInteractEdata]="telemetryService.getTelemetryInteractEdata('show_' + libraryLabels?.itemType + '_added_to_' + (libraryLabels?.collectionType).split(' ').join('_') ,'click','launch', telemetryService?.telemetryPageId,
       {showAddedItem: !showAddedContent})"
@@ -48,7 +48,7 @@
       </div>
     </div>
   </div>
-  <h6 class="sb-color-gray-400 font-weight-normal mt-20">{{configService.labelConfig?.lbl?.changingFilters}} </h6>
+  <h6 class="sb-color-gray-400 font-weight-normal mt-20">{{configService.labelConfig?.lbl?.changingFilters | interpolate: '{ITEM_TYPE}': libraryLabels?.itemType}} </h6>
   <a class="sb-color-primary cursor-pointer font-weight-bold fs-0-785 text-inherit" (click)="changeFilter()" libTelemetryInteract
   [telemetryInteractEdata]="telemetryService.getTelemetryInteractEdata('change_filter','click','launch', telemetryService?.telemetryPageId)">{{configService.labelConfig?.lbl?.ChangeFilters}}</a>
 </div>
