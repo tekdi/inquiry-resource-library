@@ -31,7 +31,7 @@
       <section class="sb-g-col-xs-12 sb-g-col-md-4 sb-g-col-lg-4">
           <lib-library-list (onChangeEvent)="onChangeEvent($event)" [selectedContent] ="selectedContent"
           [contentList]="contentList" [showAddedContent]="showAddedContent" [existingContentCounts]="existingContentCounts"
-          (moveEvent)="showResourceTemplate($event)" (addContentEvent)="checkContentAdd($event)">
+          [libraryLabels]="defaultLibraryLabels" (moveEvent)="showResourceTemplate($event)" (addContentEvent)="checkContentAdd($event)">
           </lib-library-list>
       </section>
       <!-- Right Player Sections -->
@@ -65,9 +65,9 @@
 <div class="result-no-found">
   <div class="ui container sb-container" *ngIf="!showLoader && !contentList?.length">
     <div class="add-to-library__no-result">
-      <h5 class="font-weight-bold">{{configService.labelConfig?.lbl?.noMatchingContent}}</h5>
+      <h5 class="font-weight-bold">{{configService.labelConfig?.lbl?.noMatchingContent | interpolate: '{ITEM_TYPE}': defaultLibraryLabels?.itemType}}</h5>
       <img alt="No Content available" class="mt-16" src="assets/images/emptyResult.svg">
-      <h6 class="sb-color-gray-300 font-weight-normal mt-8">{{configService.labelConfig?.lbl?.changeFilterMessage}}</h6>
+      <h6 class="sb-color-gray-300 font-weight-normal mt-8">{{configService.labelConfig?.lbl?.changeFilterMessage | interpolate: '{ITEM_TYPE}': defaultLibraryLabels?.itemType}}</h6>
       <button class="sb-btn sb-btn-secondary sb-btn-normal mt-16" libTelemetryInteract
       [telemetryInteractEdata]="telemetryService.getTelemetryInteractEdata('change_filter','click','launch', telemetryService?.telemetryPageId)" (click)="openFilter();">{{configService.labelConfig?.lbl?.changeFilter}}</button>
     </div>
@@ -75,13 +75,15 @@
 </div>
 
 <div *ngIf="!showLoader" class="add-to-library__footer">
-  <div class="title sb-color-primary font-weight-bold fs-1">({{selectedContentList.length}}) content selected</div>
+  <div class="title sb-color-primary font-weight-bold fs-1">({{selectedContentList.length}}) {{defaultLibraryLabels?.itemType}} selected</div>
   <div class="d-flex flex-ai-center">
-    <small class="sb-color-gray-400 d-block">{{configService.labelConfig?.lbl?.addSelectedItems}}</small>
+    <small class="sb-color-gray-400 d-block">{{configService.labelConfig?.lbl?.addSelectedItems | interpolate: '{ITEM_TYPE}':
+      defaultLibraryLabels?.itemType | interpolate: '{COLLECTION}': defaultLibraryLabels?.collectionType}}</small>
     <button class="sb-btn sb-btn-sm sb-left-icon-btn font-weight-bold text-inherit m-15 p-12" (click)="addtolibrary()"
     [disabled]="((!selectedContentList.length) || (enableAddContentButton === false))" [ngClass]="[((!selectedContentList.length) ||
     (enableAddContentButton === false)) ? 'sb-btn-disabled' : 'sb-btn-dark-green']">
-      {{configService.labelConfig?.lbl?.addContent}}
+      {{configService.labelConfig?.lbl?.addContent | interpolate: '{ITEM_TYPE}':
+      defaultLibraryLabels?.itemType}}
     </button>
   </div>
 </div>
