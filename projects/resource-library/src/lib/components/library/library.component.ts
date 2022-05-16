@@ -101,8 +101,8 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
             if (this.libraryInput.libraryLabels.collectionType) {
                 this.defaultLibraryLabels.collectionType = this.libraryInput.libraryLabels.collectionType;
             }
-            this.addContentTelemetryLabel = 'add_' + _.lowerCase(this.defaultLibraryLabels.itemType);
         }
+        this.addContentTelemetryLabel = 'add_' + _.lowerCase(this.defaultLibraryLabels.itemType);
     }
 
     setPrimaryCategory() {
