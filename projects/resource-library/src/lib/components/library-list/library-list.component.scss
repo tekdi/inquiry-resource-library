@@ -36,7 +36,7 @@
       position: relative;
 
       &.active{
-        background: var(--secondary-300);
+        background: #d4efe6 !important;
         border: 0.0625rem solid var(--gray-100);
         border-bottom: 0;
         &.active:last-child{
@@ -52,11 +52,11 @@
         }
       }
       &.selected{
-        background: var(--secondary-300);
-        border: solid 1px var(--primary-600);
+        background: #d4efe6 !important;
+        border:1px solid #005391 !important;
       }
       &.active.selected{
-        border: solid 1px var(--primary-600) !important;
+        border:1px solid #005391 !important;
       }
 
       &.greyed-out {
@@ -113,6 +113,9 @@
 
       &--active {
         background: var(--primary-100);
+      }
+      .sb-checkbox.ui.checkbox{
+        min-width: 30px !important;
       }
     }
   }
