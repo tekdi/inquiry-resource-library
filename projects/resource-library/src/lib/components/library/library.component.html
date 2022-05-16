@@ -81,7 +81,8 @@
       defaultLibraryLabels?.itemType | interpolate: '{COLLECTION}': defaultLibraryLabels?.collectionType}}</small>
     <button class="sb-btn sb-btn-sm sb-left-icon-btn font-weight-bold text-inherit m-15 p-12" (click)="addtolibrary()"
     [disabled]="((!selectedContentList.length) || (enableAddContentButton === false))" [ngClass]="[((!selectedContentList.length) ||
-    (enableAddContentButton === false)) ? 'sb-btn-disabled' : 'sb-btn-dark-green']">
+    (enableAddContentButton === false)) ? 'sb-btn-disabled' : 'sb-btn-dark-green']" libTelemetryInteract [telemetryInteractEdata]="
+    telemetryService.getTelemetryInteractEdata(addContentTelemetryLabel,'click','submit', telemetryService?.telemetryPageId)">
       {{configService.labelConfig?.lbl?.addContent | interpolate: '{ITEM_TYPE}':
       defaultLibraryLabels?.itemType}}
     </button>

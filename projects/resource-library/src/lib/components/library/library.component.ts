@@ -53,6 +53,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
         itemType: 'content',
         collectionType: 'collection'
     };
+    public addContentTelemetryLabel = '';
 
     constructor(public telemetryService: EditorTelemetryService,
                 private editorService: EditorService,
@@ -100,6 +101,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
             if (this.libraryInput.libraryLabels.collectionType) {
                 this.defaultLibraryLabels.collectionType = this.libraryInput.libraryLabels.collectionType;
             }
+            this.addContentTelemetryLabel = 'add_' + _.lowerCase(this.defaultLibraryLabels.itemType);
         }
     }
 
