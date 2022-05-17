@@ -20,7 +20,7 @@
     </div>
   </div>
 <!-- Filter -->
-  <lib-library-filter *ngIf="!showLoader" [filterValues]="defaultFilters" [searchFormConfig]="searchFormConfig"
+  <lib-library-filter *ngIf="!showLoader && searchFormConfig.length" [filterValues]="defaultFilters" [searchFormConfig]="searchFormConfig"
   [filterOpenStatus]="isFilterOpen" [frameworkId]="frameworkId" [targetPrimaryCategories]="targetPrimaryCategories"
   (filterChangeEvent)="onFilterChange($event);">
   </lib-library-filter>

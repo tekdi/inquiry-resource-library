@@ -7,10 +7,8 @@
     background: #ffffff;
   }
 
-  .ui {
-    &.modals {
-      z-index: 9999 !important;
-    }
+  [data-title] {
+    z-index: 0 !important;
   }
 }
 
@@ -123,12 +121,6 @@
       position: static !important;
       padding: 0 20px 0 0 !important
     }
-  }
-}
-
-.ui {
-  &.modals {
-    z-index: 9999 !important;
   }
 }
 

@@ -74,7 +74,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
         this.existingContentCounts = this.libraryInput.existingcontentCounts;
         this.collectionId = _.get(this.libraryInput, 'collectionId');
         this.collectionData = _.get(this.libraryInput, 'collection');
-        this.searchFormConfig = _.get(this.libraryInput, 'searchFormConfig');
+        this.searchFormConfig = _.get(this.libraryInput, 'searchFormConfig', []);
         this.editorService.fetchCollectionHierarchy(this.collectionId).subscribe((response: any) => {
             this.collectionhierarcyData = response.result.Question || response.result.questionSet || response.result.content;
             this.collectionHierarchy = this.getUnitWithChildren(this.collectionhierarcyData, this.collectionId);
