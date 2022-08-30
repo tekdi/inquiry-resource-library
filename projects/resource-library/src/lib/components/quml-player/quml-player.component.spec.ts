@@ -44,21 +44,25 @@ describe('QumlPlayerComponent', () => {
     expect(component.showPreview).toBeTruthy();
   });
   it('#setQumlPlayerData() should call setQumlPlayerData and isSingleQuestionPreview is false', () => {
-    const playerService = TestBed.inject(PlayerService);
-    component.collectionData = mockData.qumlPlayerConfig.metadata;
+    const playerService = TestBed.get(PlayerService);
+    const editorService = TestBed.get(EditorService);
     component.qumlPlayerConfig = mockData.qumlPlayerConfig;
     component.questionSetHierarchy = mockData.qumlPlayerConfig.metadata;
     component.qumlPlayerConfig.metadata = mockData.qumlPlayerConfig.metadata;
     component.isSingleQuestionPreview = false;
     spyOn(playerService, 'getQumlPlayerConfig').and.returnValue(mockData.qumlPlayerConfig);
-    spyOn(component, 'setQumlPlayerData').and.callThrough();
+    spyOn(editorService, 'getContentChildrens').and.returnValue(['do_12345', 'do_123456']);
     component.setQumlPlayerData();
-    expect(component.qumlPlayerConfig.metadata).toBeDefined();
+    expect(component.qumlPlayerConfig.metadata).toEqual(mockData.qumlPlayerConfig.metadata);
+    // expect(component.qumlPlayerConfig.metadata.totalQuestions).toEqual(mockData.qumlPlayerConfig.metadata.childNodes.length);
+    expect(component.qumlPlayerConfig.metadata.maxQuestions).toEqual(mockData.qumlPlayerConfig.metadata.maxQuestions);
+    expect(component.qumlPlayerConfig.metadata.maxScore).toEqual(mockData.qumlPlayerConfig.metadata.maxScore);
   });
   it('#setQumlPlayerData() should call setQumlPlayerData and isSingleQuestionPreview is true', () => {
-    const playerService = TestBed.inject(PlayerService);
-    const editorService = TestBed.inject(EditorService);
+    const playerService = TestBed.get(PlayerService);
+    const editorService = TestBed.get(EditorService);
     spyOn(playerService, 'getQumlPlayerConfig').and.returnValue(mockData.qumlPlayerConfig);
+    spyOn(editorService, 'getContentChildrens').and.returnValue(['do_12345', 'do_123456']);
     component.qumlPlayerConfig = mockData.qumlPlayerConfig;
     component.questionSetHierarchy = mockData.qumlPlayerConfig.metadata;
     component.qumlPlayerConfig.metadata = mockData.qumlPlayerConfig.metadata;
