@@ -73,6 +73,13 @@ export class EditorService {
         return this.publicDataService.get(req);
     }
 
+    fetchQuestionDetails(questionId) {
+        const req = {
+            url: _.get(this.configService.urlConFig, 'URLS.QUESTION.READ') + questionId
+        };
+        return this.publicDataService.get(req);
+    }
+
     submitRequestChanges(contentId, comment) {
         let objType = this.configService.categoryConfig[this.editorConfig.config.objectType];
         objType = objType.toLowerCase();

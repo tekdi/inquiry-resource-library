@@ -31,7 +31,11 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
     this.contentMetadata = _.get(this.contentMetadata, 'data.metadata') || this.contentMetadata;
     if (this.contentId !== this.contentMetadata.identifier) {
       this.contentId = this.contentMetadata.identifier;
-      this.getContentDetails();
+      if ((this.contentMetadata?.objectType).toLowerCase() === 'question') {
+        this.getQuestionDetails();
+      } else {
+        this.getContentDetails();
+      }
     }
   }
   getContentDetails() {
@@ -40,6 +44,19 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
       this.contentDetails = {
         contentId : this.contentId,
         contentData: _.get(res, 'result.content')
+      };
+      this.playerConfig = this.playerService.getPlayerConfig(this.contentDetails);
+      this.setPlayerType();
+      this.playerType === 'default-player' ? this.loadDefaultPlayer() : this.playerConfig.config = {};
+    });
+  }
+
+  getQuestionDetails() {
+    this.playerType = 'default-player';
+    this.editorService.fetchQuestionDetails(this.contentId).subscribe(res => {
+      this.contentDetails = {
+        contentId : this.contentId,
+        contentData: _.get(res, 'result.question')
       };
       this.playerConfig = this.playerService.getPlayerConfig(this.contentDetails);
       this.setPlayerType();
