@@ -31,16 +31,25 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
     this.contentMetadata = _.get(this.contentMetadata, 'data.metadata') || this.contentMetadata;
     if (this.contentId !== this.contentMetadata.identifier) {
       this.contentId = this.contentMetadata.identifier;
-      this.getContentDetails();
+      if ((this.contentMetadata?.objectType).toLowerCase() === 'question') {
+        this.getContentDetails('question');
+      } else {
+        this.getContentDetails('content');
+      }
     }
   }
-  getContentDetails() {
+  getContentDetails(objectType) {
     this.playerType = 'default-player';
-    this.editorService.fetchContentDetails(this.contentId).subscribe(res => {
+    this.editorService.fetchContentDetails(this.contentId, objectType).subscribe(res => {
       this.contentDetails = {
         contentId : this.contentId,
-        contentData: _.get(res, 'result.content')
+        contentData: {}
       };
+      if (objectType === 'question') {
+        this.contentDetails.contentData =  _.get(res, 'result.question');
+      } else if (objectType === 'content') {
+        this.contentDetails.contentData =  _.get(res, 'result.content');
+      }
       this.playerConfig = this.playerService.getPlayerConfig(this.contentDetails);
       this.setPlayerType();
       this.playerType === 'default-player' ? this.loadDefaultPlayer() : this.playerConfig.config = {};

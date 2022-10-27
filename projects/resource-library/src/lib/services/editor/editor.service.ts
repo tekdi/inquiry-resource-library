@@ -66,10 +66,17 @@ export class EditorService {
         return this.publicDataService.get(req);
     }
 
-    fetchContentDetails(contentId) {
-        const req = {
-            url: _.get(this.configService.urlConFig, 'URLS.CONTENT.READ') + contentId
-        };
+    fetchContentDetails(contentId, objectType) {
+        let req;
+        if (objectType === 'content') {
+            req = {
+                url: _.get(this.configService.urlConFig, 'URLS.CONTENT.READ') + contentId
+            };
+        } else if (objectType === 'question') {
+            req = {
+                url: _.get(this.configService.urlConFig, 'URLS.QUESTION.READ') + contentId
+            };
+        }
         return this.publicDataService.get(req);
     }
 
