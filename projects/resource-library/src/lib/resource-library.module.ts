@@ -18,9 +18,6 @@ import {SunbirdVideoPlayerModule} from '@project-sunbird/sunbird-video-player-v9
 import {QumlLibraryModule} from '@project-sunbird/sunbird-quml-player';
 import {CarouselModule} from 'ngx-bootstrap/carousel';
 import {TelemetryInteractDirective} from './directives/telemetry-interact/telemetry-interact.directive';
-import {CacheService} from 'ng2-cache-service';
-import {CacheStorageAbstract} from 'ng2-cache-service/dist/src/services/storage/cache-storage-abstract.service';
-import {CacheSessionStorage} from 'ng2-cache-service/dist/src/services/storage/session-storage/cache-session-storage.service';
 import {QumlPlayerComponent} from './components/quml-player/quml-player.component';
 import { InterpolatePipe } from './pipes/interpolate/interpolate.pipe';
 @NgModule({
@@ -36,8 +33,6 @@ import { InterpolatePipe } from './pipes/interpolate/interpolate.pipe';
         QumlLibraryModule, CarouselModule
     ],
     providers: [
-        CacheService,
-        {provide: CacheStorageAbstract, useClass: CacheSessionStorage}
     ],
     exports: [
         LibraryComponent
