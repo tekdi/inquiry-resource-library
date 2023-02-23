@@ -32,7 +32,6 @@
     "@project-sunbird/telemetry-sdk": "0.0.26",
     "@types/jquery": "^3.5.5",
     "alphanum-sort": "^1.0.2",
-    "angular2-uuid": "^1.1.1",
     "common-form-elements-web-v9": "^4.3.0",
     "core-js": "^2.5.4",
     "express": "^4.17.1",
@@ -56,6 +55,7 @@
     "rxjs": "~6.6.3",
     "svg2img": "^0.6.1",
     "tslib": "^2.0.0",
+    "uuid": "^9.0.0",
     "video.js": "^7.10.2",
     "zone.js": "~0.11.4"
   },
