@@ -30,7 +30,7 @@ export class LibraryFilterComponent implements OnInit, OnChanges {
   public frameworkDetails: any = {};
   public searchQuery: string;
 
-  constructor(private frameworkService: FrameworkService,
+  constructor(public frameworkService: FrameworkService,
               public editorService: EditorService,
               public telemetryService: EditorTelemetryService,
               public configService: ConfigService,
