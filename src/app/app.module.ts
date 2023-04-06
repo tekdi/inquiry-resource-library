@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { ResourceLibraryComponent, EditorCursor } from 'resource-library';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
-import { QuestionCursor } from '@project-sunbird/sunbird-quml-player-v9';
+import { QuestionCursor } from '@project-sunbird/sunbird-quml-player';
 import { EditorCursorImplementationService } from './editor-cursor-implementation.service';
 
 @NgModule({
@@ -15,7 +15,7 @@ import { EditorCursorImplementationService } from './editor-cursor-implementatio
     BrowserModule,
     ResourceLibraryComponent,
     BrowserAnimationsModule,
-    RouterModule.forRoot([])
+    RouterModule.forRoot([], { relativeLinkResolution: 'legacy' })
   ],
   providers: [
     { provide: QuestionCursor, useExisting: EditorCursorImplementationService },
