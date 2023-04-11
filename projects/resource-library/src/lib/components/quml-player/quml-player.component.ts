@@ -44,7 +44,6 @@ export class QumlPlayerComponent implements OnInit {
         this.qumlPlayerConfig.config.showLegend = false;
       }
     }
-    console.log('qumlPlayerConfig:: ', this.qumlPlayerConfig);
   }
 
   getPlayerEvents(event) {
