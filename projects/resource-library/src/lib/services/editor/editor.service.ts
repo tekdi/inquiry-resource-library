@@ -108,30 +108,6 @@ export class EditorService {
         }, 0);
     }
 
-
-    _toFlatObj(data, questionId?, selectUnitId?) {
-        const instance = this;
-        if (data && data.data) {
-            instance.data[data.data.id] = {
-                name: data.title,
-                children: _.map(data.children, (child) => {
-                    return child.data.id;
-                }),
-                root: data.data.root
-            };
-            if (questionId && selectUnitId && selectUnitId === data.data.id) {
-                instance.data[data.data.id].children.push(questionId);
-            }
-            if (questionId && selectUnitId && data.folder === false) {
-                delete instance.data[data.data.id];
-            }
-            _.forEach(data.children, (collection) => {
-                instance._toFlatObj(collection, questionId, selectUnitId);
-            });
-        }
-        return instance.data;
-    }
-
     fetchContentListDetails(req) {
         return this.publicDataService.post(req);
     }
