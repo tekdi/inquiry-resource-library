@@ -47,6 +47,11 @@
     z-index: 11;
 }
 
+.handle-zoom {
+    overflow: hidden;
+    position: relative;
+}
+
 .quml-container{
     .container{
         width: inherit !important;
