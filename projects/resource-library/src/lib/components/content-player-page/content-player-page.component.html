@@ -1,13 +1,12 @@
 <div class="aspectratio" data-ratio="16:9" #aspectRatio>
 
     <iframe #contentIframe id="contentPlayer" *ngIf="playerType === 'default-player'" class="contentViewerIframeShadow" name="contentPlayer"></iframe>
-
-    <sunbird-pdf-player *ngIf="playerType === 'pdf-player'" [playerConfig]="playerConfig"
-    (playerEvent)="eventHandler($event)" (telemetryEvent)="generateContentReadEvent($event, true)"></sunbird-pdf-player>
-
-    <sunbird-video-player *ngIf="playerType === 'video-player'" [playerConfig]="playerConfig"
-(playerEvent)="eventHandler($event)" (telemetryEvent)="generateContentReadEvent($event, true)"></sunbird-video-player>
-
+    <ng-container *ngIf="playerType === 'pdf-player'">
+        <span #pdfPlayer></span>
+    </ng-container>
+    <ng-container *ngIf="playerType === 'video-player'">
+        <span #videoPlayer></span>
+    </ng-container>
     <div class="b-1-100 br-2 mt-5" *ngIf="playerType === 'qml'">
         <lib-quml-player [collectionData]="collectionData" [questionSetHierarchy]="contentMetadata" [isSingleQuestionPreview]="true" ></lib-quml-player>
     </div>

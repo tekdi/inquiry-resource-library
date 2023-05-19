@@ -1,7 +1,7 @@
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {CommonFormElementsModule} from 'common-form-elements-web-v9';
 import {SuiModule} from 'ng2-semantic-ui-v9';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
@@ -36,7 +36,8 @@ import { InterpolatePipe } from './pipes/interpolate/interpolate.pipe';
     ],
     exports: [
         LibraryComponent
-    ]
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ResourceLibraryModule {
 }
