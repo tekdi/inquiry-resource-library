@@ -1,6 +1,6 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, OnChanges, ViewEncapsulation} from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, OnChanges, ViewEncapsulation } from '@angular/core';
 import * as _ from 'lodash-es';
-import { EditorService} from '../../services/editor/editor.service';
+import { EditorService } from '../../services/editor/editor.service';
 import { PlayerService } from '../../services/player/player.service';
 import { ConfigService } from '../../services/config/config.service';
 declare var $: any;
@@ -13,6 +13,9 @@ declare var $: any;
 })
 export class ContentPlayerPageComponent implements OnInit, OnChanges {
   @ViewChild('contentIframe') contentIframe: ElementRef;
+  @ViewChild('pdfPLayer') pdfPlayer: ElementRef;
+  @ViewChild('videoPlayer') videoPlayer: ElementRef;
+
   @Input() contentMetadata: any;
   @Input() collectionData: any;
   public contentDetails: any;
@@ -23,9 +26,9 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
   hierarchy: any;
 
   constructor(private editorService: EditorService, private playerService: PlayerService,
-              public configService: ConfigService) { }
+    public configService: ConfigService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngOnChanges() {
     this.contentMetadata = _.get(this.contentMetadata, 'data.metadata') || this.contentMetadata;
@@ -42,17 +45,22 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
     this.playerType = 'default-player';
     this.editorService.fetchContentDetails(this.contentId, objectType).subscribe(res => {
       this.contentDetails = {
-        contentId : this.contentId,
+        contentId: this.contentId,
         contentData: {}
       };
       if (objectType === 'question') {
-        this.contentDetails.contentData =  _.get(res, 'result.question');
+        this.contentDetails.contentData = _.get(res, 'result.question');
       } else if (objectType === 'content') {
-        this.contentDetails.contentData =  _.get(res, 'result.content');
+        this.contentDetails.contentData = _.get(res, 'result.content');
       }
       this.playerConfig = this.playerService.getPlayerConfig(this.contentDetails);
       this.setPlayerType();
-      this.playerType === 'default-player' ? this.loadDefaultPlayer() : this.playerConfig.config = {};
+      if (this.playerType === 'default-player') {
+        this.loadDefaultPlayer();
+      } else {
+        this.playerConfig.config = {};
+        this.loadNewPlayer();
+      }
     });
   }
 
@@ -88,6 +96,28 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
     }, 0);
   }
 
+  loadNewPlayer() {
+    setTimeout(() => {
+      if (this.playerType == "pdf-player") {
+
+        const pdfElement = document.createElement('sunbird-pdf-player');
+        pdfElement.setAttribute('player-config', JSON.stringify(this.playerConfig));
+        pdfElement.addEventListener('playerEvent', this.eventHandler);
+        pdfElement.addEventListener('telemetryEvent', this.generateContentReadEvent);
+        this.pdfPlayer.nativeElement.append(pdfElement);
+
+      } else if (this.playerType == "video-player") {
+
+        const videoElement = document.createElement('sunbird-video-player');
+        videoElement.setAttribute('player-config', JSON.stringify(this.playerConfig));
+        videoElement.addEventListener('playerEvent', this.eventHandler);
+        videoElement.addEventListener('telemetryEvent', this.generateContentReadEvent);
+        this.videoPlayer.nativeElement.append(videoElement);
+
+      }
+    }, 500);
+  }
+
   /**
    * Adjust player height after load
    */
@@ -99,7 +129,7 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
     }
   }
 
-  eventHandler(e) {}
+  eventHandler(e) { }
 
-  generateContentReadEvent(e, boo) {}
+  generateContentReadEvent(e) { }
 }
