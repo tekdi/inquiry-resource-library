@@ -1,6 +1,6 @@
 {
   "name": "@project-sunbird/sunbird-resource-library",
-  "version": "5.8.0",
+  "version": "5.8.1",
   "dependencies": {
     "tslib": "^2.0.0"
   },
@@ -10,7 +10,6 @@
     "common-form-elements-web-v9": "^4.7.2",
     "ng2-semantic-ui-v9": "0.0.3",
     "@project-sunbird/ckeditor-build-classic": "^4.1.3",
-    "@project-sunbird/sunbird-quml-player-v9": "^5.1.5",
     "@project-sunbird/sunbird-pdf-player-web-component": "^1.0.1",
     "@project-sunbird/sunbird-video-player-web-component": "^1.0.1"
   },
