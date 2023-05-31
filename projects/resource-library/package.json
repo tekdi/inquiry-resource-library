@@ -1,6 +1,6 @@
 {
   "name": "@project-sunbird/sunbird-resource-library",
-  "version": "5.7.1",
+  "version": "5.8.0",
   "dependencies": {
     "tslib": "^2.0.0"
   },
@@ -13,5 +13,13 @@
     "@project-sunbird/sunbird-quml-player-v9": "^5.1.5",
     "@project-sunbird/sunbird-pdf-player-web-component": "^1.0.1",
     "@project-sunbird/sunbird-video-player-web-component": "^1.0.1"
+  },
+  "peerDependenciesMeta": {
+    "@project-sunbird/sunbird-pdf-player-web-component": {
+      "optional": true
+    },
+    "@project-sunbird/sunbird-video-player-web-component": {
+      "optional": true
+    }
   }
 }
