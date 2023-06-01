@@ -40,11 +40,6 @@
                 "glob": "**/*",
                 "input": "projects/resource-library/src/lib/assets",
                 "output": "/assets/"
-              },
-              {
-                "glob": "**/*",
-                "input": "node_modules/@project-sunbird/sunbird-quml-player-v9/lib/assets/",
-                "output": "/assets/"
               }
             ],
             "styles": [

@@ -119,7 +119,7 @@ describe('ContentPlayerPageComponent', () => {
 
   it('#generateContentReadEvent() should get called', () => {
     spyOn(component, 'generateContentReadEvent').and.callThrough();
-    component.generateContentReadEvent({}, {});
+    component.generateContentReadEvent({});
     expect(component.generateContentReadEvent).toHaveBeenCalled();
   })
 });
