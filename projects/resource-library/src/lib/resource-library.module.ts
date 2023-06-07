@@ -13,8 +13,6 @@ import {LibraryFilterComponent} from './components/library-filter/library-filter
 import {LibraryListComponent} from './components/library-list/library-list.component';
 import {LibraryPlayerComponent} from './components/library-player/library-player.component';
 import {SkeletonLoaderComponent} from './components/skeleton-loader/skeleton-loader.component';
-import {QumlLibraryModule} from '@project-sunbird/sunbird-quml-player';
-import {CarouselModule} from 'ngx-bootstrap/carousel';
 import {TelemetryInteractDirective} from './directives/telemetry-interact/telemetry-interact.directive';
 import {QumlPlayerComponent} from './components/quml-player/quml-player.component';
 import { InterpolatePipe } from './pipes/interpolate/interpolate.pipe';
@@ -27,8 +25,7 @@ import { InterpolatePipe } from './pipes/interpolate/interpolate.pipe';
     ],
     imports: [
         CommonModule, FormsModule, ReactiveFormsModule, RouterModule.forChild([]), SuiModule,
-        CommonFormElementsModule, InfiniteScrollModule, HttpClientModule,
-        QumlLibraryModule, CarouselModule
+        CommonFormElementsModule, InfiniteScrollModule, HttpClientModule
     ],
     providers: [
     ],
