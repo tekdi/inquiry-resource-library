@@ -76,7 +76,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
         this.collectionData = _.get(this.libraryInput, 'collection');
         this.searchFormConfig = _.get(this.libraryInput, 'searchFormConfig', []);
         this.editorService.fetchCollectionHierarchy(this.collectionId).subscribe((response: any) => {
-            this.collectionhierarcyData = response.result.Question || response.result.questionSet || response.result.content;
+            this.collectionhierarcyData = response.result.question || response.result.questionset || response.result.content;
             this.collectionHierarchy = this.getUnitWithChildren(this.collectionhierarcyData, this.collectionId);
             if (_.has(this.collectionhierarcyData, 'targetFWIds')) {
                 this.frameworkId = _.first(_.castArray(this.collectionhierarcyData.targetFWIds));
@@ -175,7 +175,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
             data: {
                 request: {
                     query: query || '',
-                    filters: _.pickBy({ ...filters, ...{ status: ['Live'], visibility: 'Default', objectType: this.targetObjectTypes }}),
+                    filters: _.pickBy({ ...filters, ...{ status: ['Live'], visibility: 'Default', qumlVersion: 1.1 , objectType: this.targetObjectTypes }}),
                     sort_by: {
                         lastUpdatedOn: 'desc'
                     }

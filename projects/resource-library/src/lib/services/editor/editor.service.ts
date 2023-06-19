@@ -80,24 +80,6 @@ export class EditorService {
         return this.publicDataService.get(req);
     }
 
-    submitRequestChanges(contentId, comment) {
-        let objType = this.configService.categoryConfig[this.editorConfig.config.objectType];
-        objType = objType.toLowerCase();
-        const url = this.configService.urlConFig.URLS[this.editorConfig.config.objectType];
-        const requestBody = {
-            request: {
-                [objType]: {
-                    rejectComment: _.trim(comment)
-                }
-            }
-        };
-        const option = {
-            url: `${url.CONTENT_REJECT}${contentId}`,
-            data: requestBody
-        };
-        return this.publicDataService.post(option);
-    }
-
     public publish(value: any) {
         this.questionStream$.next(value);
     }

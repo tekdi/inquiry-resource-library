@@ -1,6 +1,6 @@
 {
   "name": "@project-sunbird/sunbird-resource-library",
-  "version": "5.8.3",
+  "version": "6.0.0",
   "dependencies": {
     "tslib": "^2.0.0"
   },
