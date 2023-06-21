@@ -23,7 +23,6 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
   public content: any;
   public playerType: string;
   public contentId: string;
-  hierarchy: any;
 
   constructor(private editorService: EditorService, private playerService: PlayerService,
     public configService: ConfigService) { }
@@ -41,27 +40,31 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
       }
     }
   }
+
   getContentDetails(objectType) {
-    this.playerType = 'default-player';
-    this.editorService.fetchContentDetails(this.contentId, objectType).subscribe(res => {
-      this.contentDetails = {
-        contentId: this.contentId,
-        contentData: {}
-      };
-      if (objectType === 'question') {
-        this.contentDetails.contentData = _.get(res, 'result.question');
-      } else if (objectType === 'content') {
+    this.contentDetails = {
+      contentId: this.contentId,
+      contentData: {}
+    };
+    if (objectType === 'question') {
+      this.editorService.getQuestionList(this.contentId).subscribe(res => {
+        this.contentDetails.contentData = res.result.questions[0];
+        this.playerType = 'quml'
+      })
+    } else if(objectType === 'content') {
+      this.playerType = 'default-player';
+      this.editorService.fetchContentDetails(this.contentId, objectType).subscribe(res => {
         this.contentDetails.contentData = _.get(res, 'result.content');
-      }
-      this.playerConfig = this.playerService.getPlayerConfig(this.contentDetails);
-      this.setPlayerType();
-      if (this.playerType === 'default-player') {
-        this.loadDefaultPlayer();
-      } else {
-        this.playerConfig.config = {};
-        this.loadNewPlayer();
-      }
-    });
+        this.playerConfig = this.playerService.getPlayerConfig(this.contentDetails);
+        this.setPlayerType();
+        if (this.playerType === 'default-player') {
+          this.loadDefaultPlayer();
+        } else {
+          this.playerConfig.config = {};
+          this.loadNewPlayer();
+        }
+      })
+    }
   }
 
   setPlayerType() {
@@ -75,7 +78,7 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
     });
 
     if (_.get(this.contentDetails, 'contentData.mimeType') === 'application/vnd.sunbird.question') {
-      this.playerType = 'qml';
+      this.playerType = 'quml';
     }
   }
 

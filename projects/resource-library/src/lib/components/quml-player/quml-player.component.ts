@@ -11,7 +11,7 @@ import { EditorService } from '../../services/editor/editor.service';
 })
 export class QumlPlayerComponent implements OnInit, AfterViewInit {
   qumlPlayerConfig: any;
-  @Input() questionSetHierarchy: any;
+  @Input() questionMetadata: any;
   @Input() collectionData: any;
   @Input() isSingleQuestionPreview = false;
   showPreview = false;
@@ -33,18 +33,23 @@ export class QumlPlayerComponent implements OnInit, AfterViewInit {
     this.qumlPlayerConfig = playerConfig;
     this.qumlPlayerConfig.context.threshold = _.get(this.configService, 'playerConfig.threshold');
     this.qumlPlayerConfig.metadata = _.cloneDeep(this.collectionData);
+    this.qumlPlayerConfig.metadata['outcomeDeclaration'] = { maxScore: {
+        defaultValue: this.questionMetadata?.outcomeDeclaration?.maxScore?.defaultValue
+      }
+    };
     if (this.qumlPlayerConfig.metadata) {
-      this.qumlPlayerConfig.metadata.childNodes = [ this.questionSetHierarchy.identifier ];
-      this.qumlPlayerConfig.metadata.children = [ this.questionSetHierarchy ];
+      this.qumlPlayerConfig.metadata.childNodes = [ this.questionMetadata.identifier ];
+      this.qumlPlayerConfig.metadata.children = [ this.questionMetadata ];
       if (this.isSingleQuestionPreview) {
         this.qumlPlayerConfig.context.threshold = 1;
         this.qumlPlayerConfig.metadata.maxQuestions = 1;
         this.qumlPlayerConfig.metadata.showStartPage = 'No';
-        this.qumlPlayerConfig.metadata.showTimer = 'No';
+        this.qumlPlayerConfig.metadata.showTimer = false;
         this.qumlPlayerConfig.metadata.requiresSubmit = 'No';
         this.qumlPlayerConfig.config.showLegend = false;
       }
     }
+    console.log('qumlPlayerConfig:: ', this.qumlPlayerConfig);
   }
 
   ngAfterViewInit() {
