@@ -80,6 +80,20 @@ export class EditorService {
         return this.publicDataService.get(req);
     }
 
+    getQuestionList(questionId) {
+        const reqParam: any = {
+          url: _.get(this.configService.urlConFig, 'URLS.QUESTION.LIST'),
+          data: {
+            request: {
+              search: {
+                identifier: [questionId]
+              }
+            }
+          }
+        };
+        return this.publicDataService.post(reqParam);
+    }
+
     public publish(value: any) {
         this.questionStream$.next(value);
     }

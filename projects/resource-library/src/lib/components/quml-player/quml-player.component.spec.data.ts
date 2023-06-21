@@ -201,7 +201,7 @@ export const mockData = {
                         "Student"
                     ],
                     "visibility": "Parent",
-                    "showTimer": "No",
+                    "showTimer": false,
                     "author": "Test",
                     "index": 1,
                     "qType": "SA",
@@ -259,7 +259,7 @@ export const mockData = {
                         "Student"
                     ],
                     "visibility": "Parent",
-                    "showTimer": "No",
+                    "showTimer": false,
                     "author": "Test",
                     "index": 2,
                     "qType": "SA",
@@ -317,7 +317,7 @@ export const mockData = {
                         "Student"
                     ],
                     "visibility": "Parent",
-                    "showTimer": "No",
+                    "showTimer": false,
                     "author": "Test",
                     "index": 3,
                     "qType": "SA",
@@ -376,7 +376,7 @@ export const mockData = {
                         "Student"
                     ],
                     "visibility": "Parent",
-                    "showTimer": "No",
+                    "showTimer": false,
                     "author": "Test",
                     "index": 4,
                     "qType": "MCQ",
@@ -437,7 +437,7 @@ export const mockData = {
                         "Student"
                     ],
                     "visibility": "Parent",
-                    "showTimer": "No",
+                    "showTimer": false,
                     "author": "Test",
                     "index": 5,
                     "qType": "SA",
@@ -495,7 +495,7 @@ export const mockData = {
                         "Student"
                     ],
                     "visibility": "Parent",
-                    "showTimer": "No",
+                    "showTimer": false,
                     "author": "Test",
                     "index": 6,
                     "qType": "SA",
@@ -529,7 +529,7 @@ export const mockData = {
                 "Student"
             ],
             "visibility": "Default",
-            "showTimer": "Yes",
+            "showTimer": true,
             "author": "Test",
             "maxQuestions": 4,
             "showStartPage": 'No',
@@ -596,6 +596,11 @@ export const mockData = {
             "warningTime": "00:04:00",
             "totalQuestions": 6,
             "maxScore": 4,
+            "outcomeDeclaration": {
+                "maxScore": {
+                    "defaultValue": 4
+                }
+            }
         },
         "data": {}
     },

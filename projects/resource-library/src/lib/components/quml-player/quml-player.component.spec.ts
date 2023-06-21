@@ -47,7 +47,7 @@ describe('QumlPlayerComponent', () => {
     const playerService = TestBed.inject(PlayerService);
     component.collectionData = mockData.qumlPlayerConfig.metadata;
     component.qumlPlayerConfig = mockData.qumlPlayerConfig;
-    component.questionSetHierarchy = mockData.qumlPlayerConfig.metadata;
+    component.questionMetadata = mockData.qumlPlayerConfig.metadata;
     component.qumlPlayerConfig.metadata = mockData.qumlPlayerConfig.metadata;
     component.isSingleQuestionPreview = false;
     spyOn(playerService, 'getQumlPlayerConfig').and.returnValue(mockData.qumlPlayerConfig);
@@ -59,8 +59,9 @@ describe('QumlPlayerComponent', () => {
     const playerService = TestBed.inject(PlayerService);
     const editorService = TestBed.inject(EditorService);
     spyOn(playerService, 'getQumlPlayerConfig').and.returnValue(mockData.qumlPlayerConfig);
+    component.collectionData = mockData.qumlPlayerConfig.metadata;
     component.qumlPlayerConfig = mockData.qumlPlayerConfig;
-    component.questionSetHierarchy = mockData.qumlPlayerConfig.metadata;
+    component.questionMetadata = mockData.qumlPlayerConfig.metadata;
     component.qumlPlayerConfig.metadata = mockData.qumlPlayerConfig.metadata;
     component.isSingleQuestionPreview = true;
     component.setQumlPlayerData();

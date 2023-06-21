@@ -7,8 +7,8 @@
     <ng-container *ngIf="playerType === 'video-player'">
         <span #videoPlayer></span>
     </ng-container>
-    <div class="b-1-100 br-2 mt-5" *ngIf="playerType === 'qml'">
-        <lib-quml-player [collectionData]="collectionData" [questionSetHierarchy]="contentMetadata" [isSingleQuestionPreview]="true" ></lib-quml-player>
+    <div class="b-1-100 br-2 mt-5" *ngIf="playerType === 'quml'">
+        <lib-quml-player [collectionData]="collectionData" [questionMetadata]="questionMetadata" [isSingleQuestionPreview]="true" ></lib-quml-player>
     </div>
 </div>
 

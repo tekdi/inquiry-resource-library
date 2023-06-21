@@ -75,15 +75,10 @@ describe('ContentPlayerPageComponent', () => {
   it('#getContentDetails should fetch content details when API success', () => {
     spyOn(component, 'getContentDetails').and.callThrough();
     const editorService = TestBed.get(EditorService);
-    spyOn(editorService, 'fetchContentDetails').and.returnValue(of({result: { question: { name: 'test' }}}));
-    const playerService = TestBed.get(PlayerService);
-    spyOn(playerService, 'getPlayerConfig').and.returnValue({});
-    spyOn(component, 'setPlayerType').and.callFake(() => {});
-    spyOn(component, 'loadDefaultPlayer').and.callFake(() => {});
+    spyOn(editorService, 'getQuestionList').and.returnValue(of({result: { questions: [{ name: 'test' }]}}));
     component.contentId = 'do_1234';
     component.getContentDetails('question');
-    expect(component.setPlayerType).toHaveBeenCalled();
-    expect(component.loadDefaultPlayer).toHaveBeenCalled();
+    expect(editorService.getQuestionList).toHaveBeenCalled();
   });
 
   it('#getContentDetails should fetch content details when API success', () => {
