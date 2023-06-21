@@ -42,6 +42,7 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
   }
 
   getContentDetails(objectType) {
+    this.playerType = 'default-player';
     this.contentDetails = {
       contentId: this.contentId,
       contentData: {}
@@ -52,7 +53,6 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
         this.playerType = 'quml'
       })
     } else if(objectType === 'content') {
-      this.playerType = 'default-player';
       this.editorService.fetchContentDetails(this.contentId, objectType).subscribe(res => {
         this.contentDetails.contentData = _.get(res, 'result.content');
         this.playerConfig = this.playerService.getPlayerConfig(this.contentDetails);
