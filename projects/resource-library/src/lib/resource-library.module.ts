@@ -2,7 +2,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
-import {CommonFormElementsModule} from 'common-form-elements-web-v9';
+import {CommonFormElementsModule} from '@project-sunbird/common-form-elements-full';
 import {SuiModule} from 'ng2-semantic-ui-v9';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {HttpClientModule} from '@angular/common/http';
@@ -13,8 +13,6 @@ import {LibraryFilterComponent} from './components/library-filter/library-filter
 import {LibraryListComponent} from './components/library-list/library-list.component';
 import {LibraryPlayerComponent} from './components/library-player/library-player.component';
 import {SkeletonLoaderComponent} from './components/skeleton-loader/skeleton-loader.component';
-import {QumlLibraryModule} from '@project-sunbird/sunbird-quml-player';
-import {CarouselModule} from 'ngx-bootstrap/carousel';
 import {TelemetryInteractDirective} from './directives/telemetry-interact/telemetry-interact.directive';
 import {QumlPlayerComponent} from './components/quml-player/quml-player.component';
 import { InterpolatePipe } from './pipes/interpolate/interpolate.pipe';
@@ -27,8 +25,7 @@ import { InterpolatePipe } from './pipes/interpolate/interpolate.pipe';
     ],
     imports: [
         CommonModule, FormsModule, ReactiveFormsModule, RouterModule.forChild([]), SuiModule,
-        CommonFormElementsModule, InfiniteScrollModule, HttpClientModule,
-        QumlLibraryModule, CarouselModule
+        CommonFormElementsModule, InfiniteScrollModule, HttpClientModule
     ],
     providers: [
     ],

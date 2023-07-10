@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { TelemetryInteractDirective } from '../../directives/telemetry-interact/telemetry-interact.directive';
 import { EditorTelemetryService } from '../../services/telemetry/telemetry.service';
 import { Router } from '@angular/router';
-import { CommonFormElementsModule } from 'common-form-elements-web-v9';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { SuiModule } from 'ng2-semantic-ui-v9';
 import * as $ from 'jquery';
@@ -43,7 +42,7 @@ describe('LibraryFilterComponent', () => {
       providers: [EditorTelemetryService, { provide: Router, useClass: RouterStub },
         { provide: EditorService, useValue: mockEditorService }],
      declarations: [LibraryFilterComponent, TelemetryInteractDirective],
-     imports: [FormsModule, CommonFormElementsModule, HttpClientTestingModule, SuiModule]
+     imports: [FormsModule, HttpClientTestingModule, SuiModule]
     })
     .compileComponents();
   }));

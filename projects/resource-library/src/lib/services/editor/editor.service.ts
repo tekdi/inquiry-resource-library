@@ -80,22 +80,18 @@ export class EditorService {
         return this.publicDataService.get(req);
     }
 
-    submitRequestChanges(contentId, comment) {
-        let objType = this.configService.categoryConfig[this.editorConfig.config.objectType];
-        objType = objType.toLowerCase();
-        const url = this.configService.urlConFig.URLS[this.editorConfig.config.objectType];
-        const requestBody = {
+    getQuestionList(questionId) {
+        const reqParam: any = {
+          url: _.get(this.configService.urlConFig, 'URLS.QUESTION.LIST'),
+          data: {
             request: {
-                [objType]: {
-                    rejectComment: _.trim(comment)
-                }
+              search: {
+                identifier: [questionId]
+              }
             }
+          }
         };
-        const option = {
-            url: `${url.CONTENT_REJECT}${contentId}`,
-            data: requestBody
-        };
-        return this.publicDataService.post(option);
+        return this.publicDataService.post(reqParam);
     }
 
     public publish(value: any) {

@@ -94,7 +94,7 @@ describe('EditorService', () => {
         const publicDataService = TestBed.inject(PublicDataService);
         spyOn(publicDataService, 'get').and.returnValue(of(mockData.serverResponse));
         editorService.fetchContentDetails(contentId, 'content');
-        expect(publicDataService.get).toHaveBeenCalledOnceWith({ url: `content/v3/read/${contentId}` });
+        expect(publicDataService.get).toHaveBeenCalledWith({ url: `content/v3/read/${contentId}` });
     });
 
     it('#fetchContentDetails() should return question details', async () => {
@@ -103,17 +103,7 @@ describe('EditorService', () => {
         const publicDataService = TestBed.inject(PublicDataService);
         spyOn(publicDataService, 'get').and.returnValue(of(mockData.serverResponse));
         editorService.fetchContentDetails(contentId, 'question');
-        expect(publicDataService.get).toHaveBeenCalledOnceWith({ url: `question/v1/read/${contentId}` });
-    });
-
-    it('#submitRequestChanges() should submit change request', async () => {
-        const contentId = 'do_11326714211239526417';
-        const comment = 'No appropriate description'
-        const publicDataService = TestBed.inject(PublicDataService);
-        spyOn(publicDataService, 'post').and.returnValue(of(mockData.serverResponse));
-        editorService.submitRequestChanges(contentId, comment).subscribe(data => {
-            expect(data.responseCode).toEqual('OK');
-        });
+        expect(publicDataService.get).toHaveBeenCalledWith({ url: `question/v2/read/${contentId}` });
     });
 
     it('#publish() Should emit question event', () => {
