@@ -182,6 +182,9 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
                 }
             }
         };
+        if(_.get(this.libraryInput, 'collection.eval')) {
+            option.data.request.filters = {...option.data.request.filters,eval: _.get(this.libraryInput, 'collection.eval')}
+        }
         this.showListing = false;
         this.editorService.fetchContentListDetails(option).subscribe((response: any) => {
             this.showLoader = false;
