@@ -100,7 +100,7 @@ export const mockData = {
                         identifier: 'do_11321760665667993611106',
                         lastStatusChangedOn: '2021-02-16T12:09:35.083+0000',
                         audience: [
-                            'Student'
+                            'Audience1'
                         ],
                         os: [
                             'All'
@@ -134,7 +134,7 @@ export const mockData = {
                 identifier: 'do_11321760665663078411100',
                 lastStatusChangedOn: '2021-02-16T12:09:35.077+0000',
                 audience: [
-                    'Student'
+                    'Audience1'
                 ],
                 os: [
                     'All'
@@ -165,7 +165,7 @@ export const mockData = {
         },
         identifier: 'do_1132167495905116161754',
         audience: [
-            'Student'
+            'Audience1'
         ],
         subjectIds: [
             'ekstep_ncert_k-12_subject_english'
@@ -327,7 +327,7 @@ export const mockData = {
             contentType: 'ExplanationResource',
             identifier: 'do_11309885724445900818860',
             audience: [
-                'Student'
+                'Audience1'
             ],
             me_totalTimeSpentInSec: {
                 portal: 155121
@@ -451,7 +451,7 @@ export const mockData = {
             contentType: 'ExplanationResource',
             identifier: 'do_11309894061376307219743',
             audience: [
-                'Student'
+                'Audience1'
             ],
             me_totalTimeSpentInSec: {
                 portal: 75240
@@ -576,7 +576,7 @@ export const mockData = {
             contentType: 'ExplanationResource',
             identifier: 'do_11309885724445900818860',
             audience: [
-                'Student'
+                'Audience1'
             ],
             me_totalTimeSpentInSec: {
                 portal: 155121
@@ -701,7 +701,7 @@ export const mockData = {
             contentType: 'ExplanationResource',
             identifier: 'do_11309894061376307219743',
             audience: [
-                'Student'
+                'Audience1'
             ],
             me_totalTimeSpentInSec: {
                 portal: 75240
@@ -827,7 +827,7 @@ export const mockData = {
             contentType: 'ExplanationResource',
             identifier: 'do_11309894061376307219743',
             audience: [
-                'Student'
+                'Audience1'
             ],
             me_totalTimeSpentInSec: {
                 portal: 75240
@@ -951,7 +951,7 @@ export const mockData = {
             contentType: 'ExplanationResource',
             identifier: 'do_11309885724445900818860',
             audience: [
-                'Student'
+                'Audience1'
             ],
             me_totalTimeSpentInSec: {
                 portal: 155121
@@ -1078,7 +1078,7 @@ export const mockData = {
             contentType: 'ExplanationResource',
             identifier: 'do_11309885724445900818860',
             audience: [
-                'Student'
+                'Audience1'
             ],
             me_totalTimeSpentInSec: {
                 portal: 155121

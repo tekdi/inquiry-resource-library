@@ -63,7 +63,7 @@ export const mockData = {
         contentType: 'ExplanationResource',
         identifier: 'do_11309885724445900818860',
         audience: [
-            'Student'
+            'Audience1'
         ],
         me_totalTimeSpentInSec: {
             portal: 155121
