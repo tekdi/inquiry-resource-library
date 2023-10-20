@@ -18,11 +18,13 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
 
   @Input() contentMetadata: any;
   @Input() collectionData: any;
+  @Input() questionMetadataFormConfig: any;
   public contentDetails: any;
   public playerConfig: any;
   public content: any;
   public playerType: string;
   public contentId: string;
+  public metadataDetails = [];
 
   constructor(private editorService: EditorService, private playerService: PlayerService,
     public configService: ConfigService) { }
@@ -65,6 +67,18 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
         }
       })
     }
+    this.setContentLabelMapping()
+  }
+
+  setContentLabelMapping() {
+    const fieldsProperties = this.questionMetadataFormConfig.properties;
+    _.forEach(fieldsProperties, (field) => {
+      if (_.has(this.contentDetails.contentData, field.code)) {
+        this.metadataDetails.push({code: field.code, value: _.get(this.contentDetails.contentData, field.code)})
+      } else {
+        this.metadataDetails.push({code: field.code, value: ''});
+      }
+    });
   }
 
   setPlayerType() {

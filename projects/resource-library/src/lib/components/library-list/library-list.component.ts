@@ -11,7 +11,7 @@ import * as _ from 'lodash-es';
     encapsulation: ViewEncapsulation.None,
 })
 export class LibraryListComponent implements OnInit {
-    @Input() contentList;
+    @Input() contentList: any;
     @Input() showAddedContent: any;
     @Output() onChangeEvent = new EventEmitter<any>();
     @Output() moveEvent = new EventEmitter<any>();
