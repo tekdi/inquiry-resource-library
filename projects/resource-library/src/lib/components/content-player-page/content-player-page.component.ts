@@ -72,6 +72,7 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
   }
 
   setContentLabelMapping() {
+    this.metadataDetails = [];
     const fieldsProperties = this.questionMetadataFormConfig.properties;
     _.forEach(fieldsProperties, (field) => {
       if (_.has(this.contentDetails.contentData, field.code)) {
