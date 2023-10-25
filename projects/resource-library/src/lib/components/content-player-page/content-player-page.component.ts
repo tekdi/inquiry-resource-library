@@ -53,6 +53,7 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
       this.editorService.getQuestionList(this.contentId).subscribe(res => {
         this.contentDetails.contentData = res.result.questions[0];
         this.playerType = 'quml'
+        this.setContentLabelMapping();
       })
     } else if(objectType === 'content') {
       this.editorService.fetchContentDetails(this.contentId, objectType).subscribe(res => {
@@ -65,20 +66,21 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
           this.playerConfig.config = {};
           this.loadNewPlayer();
         }
+        this.setContentLabelMapping()
       })
     }
-    this.setContentLabelMapping()
   }
 
   setContentLabelMapping() {
     const fieldsProperties = this.questionMetadataFormConfig.properties;
     _.forEach(fieldsProperties, (field) => {
       if (_.has(this.contentDetails.contentData, field.code)) {
-        this.metadataDetails.push({code: field.code, value: _.get(this.contentDetails.contentData, field.code)})
+        this.metadataDetails.push({code: field.code, label: field.label, value: _.get(this.contentDetails.contentData, field.code)})
       } else {
-        this.metadataDetails.push({code: field.code, value: ''});
+        this.metadataDetails.push({code: field.code, label: field.label, value: ''});
       }
     });
+    console.log('metadataDetails', this.metadataDetails)
   }
 
   setPlayerType() {
