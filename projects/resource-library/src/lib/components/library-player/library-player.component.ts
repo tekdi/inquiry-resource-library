@@ -12,7 +12,7 @@ import * as _ from 'lodash-es';
 export class LibraryPlayerComponent implements OnInit, OnChanges {
     @Input() collectionData;
     @Input() contentListDetails;
-    @Input() questionMetadataFormConfig;
+    @Input() metadataFormConfig;
     @Input() libraryLabels;
     public createdByField;
     public createdByValue;

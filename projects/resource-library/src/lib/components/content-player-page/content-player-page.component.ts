@@ -18,7 +18,7 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
 
   @Input() contentMetadata: any;
   @Input() collectionData: any;
-  @Input() questionMetadataFormConfig: any;
+  @Input() metadataFormConfig: any;
   public contentDetails: any;
   public playerConfig: any;
   public content: any;
@@ -73,12 +73,22 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
 
   setContentLabelMapping() {
     this.metadataDetails = [];
-    const fieldsProperties = this.questionMetadataFormConfig.properties;
+    const fieldsProperties = this.metadataFormConfig.properties;
     _.forEach(fieldsProperties, (field) => {
       if (_.has(this.contentDetails.contentData, field.code)) {
-        this.metadataDetails.push({code: field.code, label: field.label, value: _.get(this.contentDetails.contentData, field.code)})
+        this.metadataDetails.push(
+          {
+            code: field.code,
+            label: field.label,
+            value: _.get(this.contentDetails.contentData, field.code)
+        })
       } else {
-        this.metadataDetails.push({code: field.code, label: field.label, value: ''});
+        this.metadataDetails.push(
+          {
+            code: field.code,
+            label: field.label,
+            value: ''
+          });
       }
     });
     console.log('metadataDetails', this.metadataDetails)

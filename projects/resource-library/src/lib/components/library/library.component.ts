@@ -16,7 +16,7 @@ import {ConfigService} from '../../services/config/config.service';
 import {Router} from '@angular/router';
 import {HelperService} from '../../services/helper/helper.service';
 import {FrameworkService} from '../../services/framework/framework.service';
-import { questionCreationFormConfig } from './library.component.data';
+import { metadataDefaultConfig } from './library.component.data';
 
 @Component({
     selector: 'lib-library',
@@ -29,7 +29,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
     @Output() libraryEmitter = new EventEmitter<any>();
     collectionData: any;
     public searchFormConfig: any;
-    public questionMetadataFormConfig: any;
+    public metadataFormConfig: any;
     public pageId = 'add_from_library';
     public contentList: any;
     public selectedContent: any;
@@ -69,7 +69,6 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.libraryInput['questionMetadataFormConfig'] = questionCreationFormConfig; // remove after getting the actual input from outside
         this.frameworkService.initialize(_.get(this.libraryInput, 'framework'));
         this.editorService.initialize(_.get(this.libraryInput, 'editorConfig'));
         this.telemetryService.initializeTelemetry(_.get(this.libraryInput, 'editorConfig'));
@@ -79,7 +78,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
         this.collectionId = _.get(this.libraryInput, 'collectionId');
         this.collectionData = _.get(this.libraryInput, 'collection');
         this.searchFormConfig = _.get(this.libraryInput, 'searchFormConfig', []);
-        this.questionMetadataFormConfig = _.get(this.libraryInput, 'questionMetadataFormConfig', []);
+        this.metadataFormConfig = _.get(this.libraryInput, 'metadataFormConfig', metadataDefaultConfig);
         this.editorService.fetchCollectionHierarchy(this.collectionId).subscribe((response: any) => {
             this.collectionhierarcyData = response.result.question || response.result.questionset || response.result.content;
             this.collectionHierarchy = this.getUnitWithChildren(this.collectionhierarcyData, this.collectionId);

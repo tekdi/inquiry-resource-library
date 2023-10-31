@@ -1,6 +1,7 @@
 <div class="aspectratio" data-ratio="16:9" #aspectRatio>
 
-    <iframe #contentIframe id="contentPlayer" *ngIf="playerType === 'default-player'" class="contentViewerIframeShadow" name="contentPlayer"></iframe>
+    <iframe #contentIframe id="contentPlayer" *ngIf="playerType === 'default-player'" class="contentViewerIframeShadow"
+        name="contentPlayer"></iframe>
     <ng-container *ngIf="playerType === 'pdf-player'">
         <span #pdfPlayer></span>
     </ng-container>
@@ -8,15 +9,18 @@
         <span #videoPlayer></span>
     </ng-container>
     <div class="b-1-100 br-2 mt-5" *ngIf="playerType === 'quml'">
-        <lib-quml-player [collectionData]="collectionData" [questionMetadata]="contentDetails?.contentData" [isSingleQuestionPreview]="true" ></lib-quml-player>
+        <lib-quml-player [collectionData]="collectionData" [questionMetadata]="contentDetails?.contentData"
+            [isSingleQuestionPreview]="true"></lib-quml-player>
     </div>
 </div>
 
 <div class="ui grid text-font pt-3 bg-white m-0 my-12">
-    <div class="four wide column" *ngFor="let metadata of metadataDetails">
-      <div class="sb-field-group">
-        <label class="sb-color-gray-600">{{metadata.label}}</label>
-        <div class="fs-0-92">{{metadata.value}}</div>
-      </div>
-    </div>
+    <ng-container *ngFor="let metadata of metadataDetails">
+        <div class="four wide column" *ngIf="metadata?.value">
+            <div class="sb-field-group">
+                <label class="sb-color-gray-600">{{metadata.label}}</label>
+                <div class="fs-0-92">{{metadata.value}}</div>
+            </div>
+        </div>
+    </ng-container>
 </div>
