@@ -44,7 +44,7 @@ export const mockData = {
         },
         mimeType: 'video/mp4',
         objectType: 'Content',
-        sourceURL: 'https://diksha.gov.in/play/content/do_31278215515898675219587',
+        sourceURL: 'https://dev.sunbirded.org/play/content/do_31278215515898675219587',
         me_totalRatingsCount: 96,
         appIcon: 'https://ntpproductionall.blob.core.windows.net/ntp-content-production/content/do_31278215585753497618355/artifact/b311u1p7hs-8xhtm2-1.2-identiication-of-2d-shapes-and-3d-objects_1560321760287.png',
         gradeLevel: [
@@ -63,7 +63,7 @@ export const mockData = {
         contentType: 'ExplanationResource',
         identifier: 'do_11309885724445900818860',
         audience: [
-            'Student'
+            'Audience1'
         ],
         me_totalTimeSpentInSec: {
             portal: 155121
@@ -105,7 +105,7 @@ export const mockData = {
         level1Concept: [
             'Identify Non Linear Shapes'
         ],
-        originData: '{"identifier":"do_31278215515898675219587","repository":"https://diksha.gov.in/play/content/do_31278215515898675219587"}',
+        originData: '{"identifier":"do_31278215515898675219587","repository":"https://dev.sunbirded.org/play/content/do_31278215515898675219587"}',
         SYS_INTERNAL_LAST_UPDATED_ON: '2020-10-07T11:54:18.733+0000',
         dialcodeRequired: 'No',
         owner: 'Tamilnadu',
