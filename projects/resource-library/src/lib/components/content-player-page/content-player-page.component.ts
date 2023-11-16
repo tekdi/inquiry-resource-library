@@ -91,7 +91,6 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
           });
       }
     });
-    console.log('metadataDetails', this.metadataDetails)
   }
 
   setPlayerType() {
