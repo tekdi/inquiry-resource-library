@@ -16,6 +16,7 @@ import {ConfigService} from '../../services/config/config.service';
 import {Router} from '@angular/router';
 import {HelperService} from '../../services/helper/helper.service';
 import {FrameworkService} from '../../services/framework/framework.service';
+import { metadataDefaultConfig } from './library.component.data';
 
 @Component({
     selector: 'lib-library',
@@ -28,6 +29,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
     @Output() libraryEmitter = new EventEmitter<any>();
     collectionData: any;
     public searchFormConfig: any;
+    public metadataFormConfig: any;
     public pageId = 'add_from_library';
     public contentList: any;
     public selectedContent: any;
@@ -51,7 +53,8 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
     existingContentCounts: number;
     public defaultLibraryLabels = {
         itemType: 'content',
-        collectionType: 'collection'
+        collectionType: 'collection',
+        createdByField: 'board'
     };
     public addContentTelemetryLabel = '';
 
@@ -75,6 +78,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
         this.collectionId = _.get(this.libraryInput, 'collectionId');
         this.collectionData = _.get(this.libraryInput, 'collection');
         this.searchFormConfig = _.get(this.libraryInput, 'searchFormConfig', []);
+        this.metadataFormConfig = _.get(this.libraryInput, 'metadataFormConfig', metadataDefaultConfig);
         this.editorService.fetchCollectionHierarchy(this.collectionId).subscribe((response: any) => {
             this.collectionhierarcyData = response.result.question || response.result.questionset || response.result.content;
             this.collectionHierarchy = this.getUnitWithChildren(this.collectionhierarcyData, this.collectionId);
@@ -100,6 +104,9 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
             }
             if (this.libraryInput.libraryLabels.collectionType) {
                 this.defaultLibraryLabels.collectionType = this.libraryInput.libraryLabels.collectionType;
+            }
+            if (this.libraryInput.libraryLabels.createdByField) {
+                this.defaultLibraryLabels.createdByField = this.libraryInput.libraryLabels.createdByField;
             }
         }
         this.addContentTelemetryLabel = 'add_' + _.lowerCase(this.defaultLibraryLabels.itemType);

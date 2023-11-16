@@ -37,4 +37,14 @@ describe('LibraryPlayerComponent', () => {
     component.ngOnInit();
     expect(component.ngOnInit).toHaveBeenCalled();
   })
+
+  it('should call ngOnChanges', () => {
+    component.createdByValue = '';
+    component.libraryLabels = {createdByField: 'board'};
+    component.contentListDetails = {board: 'CBSE'};
+    spyOn(component, 'ngOnChanges').and.callThrough();
+    component.ngOnChanges();
+    expect(component.createdByValue).toBe('CBSE');
+
+  })
 });

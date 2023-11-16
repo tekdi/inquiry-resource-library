@@ -18,11 +18,13 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
 
   @Input() contentMetadata: any;
   @Input() collectionData: any;
+  @Input() metadataFormConfig: any;
   public contentDetails: any;
   public playerConfig: any;
   public content: any;
   public playerType: string;
   public contentId: string;
+  public metadataDetails = [];
 
   constructor(private editorService: EditorService, private playerService: PlayerService,
     public configService: ConfigService) { }
@@ -51,6 +53,7 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
       this.editorService.getQuestionList(this.contentId).subscribe(res => {
         this.contentDetails.contentData = res.result.questions[0];
         this.playerType = 'quml'
+        this.setContentLabelMapping();
       })
     } else if(objectType === 'content') {
       this.editorService.fetchContentDetails(this.contentId, objectType).subscribe(res => {
@@ -63,8 +66,31 @@ export class ContentPlayerPageComponent implements OnInit, OnChanges {
           this.playerConfig.config = {};
           this.loadNewPlayer();
         }
+        this.setContentLabelMapping()
       })
     }
+  }
+
+  setContentLabelMapping() {
+    this.metadataDetails = [];
+    const fieldsProperties = this.metadataFormConfig.properties;
+    _.forEach(fieldsProperties, (field) => {
+      if (_.has(this.contentDetails.contentData, field.code)) {
+        this.metadataDetails.push(
+          {
+            code: field.code,
+            label: field.label,
+            value: _.get(this.contentDetails.contentData, field.code)
+        })
+      } else {
+        this.metadataDetails.push(
+          {
+            code: field.code,
+            label: field.label,
+            value: ''
+          });
+      }
+    });
   }
 
   setPlayerType() {
