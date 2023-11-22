@@ -16,6 +16,8 @@ import {SkeletonLoaderComponent} from './components/skeleton-loader/skeleton-loa
 import {TelemetryInteractDirective} from './directives/telemetry-interact/telemetry-interact.directive';
 import {QumlPlayerComponent} from './components/quml-player/quml-player.component';
 import { InterpolatePipe } from './pipes/interpolate/interpolate.pipe';
+import {QumlLibraryModule} from '@project-sunbird/sunbird-quml-player';
+import {CarouselModule} from 'ngx-bootstrap/carousel';
 @NgModule({
     declarations: [
         ResourceLibraryComponent, ContentPlayerPageComponent,
@@ -25,7 +27,7 @@ import { InterpolatePipe } from './pipes/interpolate/interpolate.pipe';
     ],
     imports: [
         CommonModule, FormsModule, ReactiveFormsModule, RouterModule.forChild([]), SuiModule,
-        CommonFormElementsModule, InfiniteScrollModule, HttpClientModule
+        CommonFormElementsModule, InfiniteScrollModule, HttpClientModule, QumlLibraryModule, CarouselModule
     ],
     providers: [
     ],
