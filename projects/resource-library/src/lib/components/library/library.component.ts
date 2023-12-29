@@ -182,7 +182,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
             data: {
                 request: {
                     query: query || '',
-                    filters: _.pickBy({ ...filters, ...{ status: ['Live'], visibility: 'Default', qumlVersion: 1.1 , objectType: this.targetObjectTypes }}),
+                    filters: _.pickBy({ ...filters, ...{ status: ['Live'], visibility: 'Default', schemaVersion: '1.1' , objectType: this.targetObjectTypes }}),
                     sort_by: {
                         lastUpdatedOn: 'desc'
                     }
