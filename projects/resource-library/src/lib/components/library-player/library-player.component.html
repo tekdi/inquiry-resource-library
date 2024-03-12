@@ -2,10 +2,10 @@
 <div class="d-flex flex-w-wrap content-video__player__details mt-15 pb-0 pl-0">
   <div class="d-flex flex-dc flex-basis-1">
     <div class="content-video__player__title mr-auto sb__ellipsis sb__ellipsis--one" >{{contentListDetails?.name}} </div>
-    <div class="content-video__player__title__subtitle fs-0-785"><span class="mr-8" *ngIf="contentListDetails?.board">By {{contentListDetails?.board}}</span>
+    <div class="content-video__player__title__subtitle fs-0-785"><span class="mr-8" *ngIf="createdByValue">By {{contentListDetails[createdByField]}}</span>
      <span *ngIf="contentListDetails?.me_averageRating"> <span class="mr-8" > {{contentListDetails?.me_averageRating}}</span>
       <i class="icon star"></i> </span>
     </div>
   </div>
 </div>
-<lib-contentplayer-page [collectionData]="collectionData" [contentMetadata]="contentListDetails"></lib-contentplayer-page>
+<lib-contentplayer-page [metadataFormConfig]="metadataFormConfig" [collectionData]="collectionData" [contentMetadata]="contentListDetails"></lib-contentplayer-page>

@@ -5,6 +5,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { EditorService } from '../../services/editor/editor.service';
 import { PlayerService } from '../../services/player/player.service';
 import { ConfigService } from '../../services/config/config.service';
+import { mockData } from './content-player-page.component.spec.data';
 import { of } from 'rxjs';
 import * as _ from 'lodash-es';
 describe('ContentPlayerPageComponent', () => {
@@ -73,6 +74,7 @@ describe('ContentPlayerPageComponent', () => {
   });
 
   it('#getContentDetails should fetch content details when API success', () => {
+    spyOn(component, 'setContentLabelMapping').and.callFake(() => {});
     spyOn(component, 'getContentDetails').and.callThrough();
     const editorService = TestBed.get(EditorService);
     spyOn(editorService, 'getQuestionList').and.returnValue(of({result: { questions: [{ name: 'test' }]}}));
@@ -82,6 +84,7 @@ describe('ContentPlayerPageComponent', () => {
   });
 
   it('#getContentDetails should fetch content details when API success', () => {
+    spyOn(component, 'setContentLabelMapping').and.callFake(() => {});
     spyOn(component, 'getContentDetails').and.callThrough();
     const editorService = TestBed.get(EditorService);
     spyOn(editorService, 'fetchContentDetails').and.returnValue(of({result: { content: { name: 'test' }}}));
@@ -94,6 +97,18 @@ describe('ContentPlayerPageComponent', () => {
     expect(component.setPlayerType).toHaveBeenCalled();
     expect(component.loadDefaultPlayer).toHaveBeenCalled();
   });
+
+  it('#setContentLabelMapping() should set content metadata field mapping', () => {
+    component.metadataDetails = [];
+    spyOn(component, 'setContentLabelMapping').and.callThrough();
+    component.contentDetails = {
+      contentId: mockData.subjectiveQuestion.identifier,
+      contentData: mockData.subjectiveQuestion
+    };
+    component.metadataFormConfig = mockData.metadataFormConfig;
+    component.setContentLabelMapping();
+    expect(component.metadataDetails.length).toEqual(12);
+  })
 
 
   it('#setPlayerType() should set #playerType to "pdf-player" ', () => {

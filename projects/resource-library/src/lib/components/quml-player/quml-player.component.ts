@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit , ViewChild, ViewEncapsulation} from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import * as _ from 'lodash-es';
 import { ConfigService } from '../../services/config/config.service';
 import { PlayerService } from '../../services/player/player.service';
@@ -9,13 +9,12 @@ import { EditorService } from '../../services/editor/editor.service';
   styleUrls: ['./quml-player.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class QumlPlayerComponent implements OnInit, AfterViewInit {
+export class QumlPlayerComponent implements OnInit {
   qumlPlayerConfig: any;
   @Input() questionMetadata: any;
   @Input() collectionData: any;
   @Input() isSingleQuestionPreview = false;
   showPreview = false;
-  @ViewChild('qumlPlayer') qumlPlayer: ElementRef;
   constructor(private configService: ConfigService, private playerService: PlayerService,
     private editorService: EditorService ) { }
 
@@ -50,17 +49,6 @@ export class QumlPlayerComponent implements OnInit, AfterViewInit {
       }
     }
     console.log('qumlPlayerConfig:: ', this.qumlPlayerConfig);
-  }
-
-  ngAfterViewInit() {
-      (window as any).questionListUrl = `/api/${_.get(this.configService,'urlConFig.URLS.QUESTION.LIST')}`;
-      const qumlElement = document.createElement('sunbird-quml-player');
-      qumlElement.setAttribute('player-config', JSON.stringify(this.qumlPlayerConfig));
-
-      qumlElement.addEventListener('playerEvent', this.getPlayerEvents);
-
-      qumlElement.addEventListener('telemetryEvent', this.getTelemetryEvents);
-      this.qumlPlayer.nativeElement.append(qumlElement);
   }
 
   getPlayerEvents(event) {

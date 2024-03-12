@@ -13,79 +13,12 @@
 </div>
 
 <div class="ui grid text-font pt-3 bg-white m-0 my-12">
-    <div class="four wide column">
-        <div class="sb-field-group">
-            <label class="sb-color-gray-600">{{configService.labelConfig?.lbl?.name}}</label>
-            <div class="fs-0-92">{{contentDetails?.contentData?.name}}</div>
+    <ng-container *ngFor="let metadata of metadataDetails">
+        <div class="four wide column" *ngIf="metadata?.value">
+            <div class="sb-field-group">
+                <label class="sb-color-gray-600">{{metadata.label}}</label>
+                <div class="fs-0-92">{{metadata.value}}</div>
+            </div>
         </div>
-    </div>
-    <div class="four wide column">
-        <div class="sb-field-group">
-            <label class="sb-color-gray-600">{{configService.labelConfig?.lbl?.board}}</label>
-            <div class="fs-0-92">{{contentDetails?.contentData?.board}}</div>
-        </div>
-    </div>
-    <div class="one wide column">
-        <div class="sb-field-group">
-            <label class="sb-color-gray-600">{{configService.labelConfig?.lbl?.medium}}</label>
-            <div class="fs-0-92">{{contentDetails?.contentData?.medium}}</div>
-        </div>
-    </div>
-
-    <div class="four wide column">
-        <div class="sb-field-group">
-            <label class="sb-color-gray-600">{{configService.labelConfig?.lbl?.grade}}</label>
-            <div class="fs-0-92">{{contentDetails?.contentData?.gradeLevel}}</div>
-        </div>
-    </div>
-    <div class="four wide column">
-        <div class="sb-field-group">
-            <label class="sb-color-gray-600">{{configService.labelConfig?.lbl?.subject}}</label>
-            <div class="fs-0-92">{{contentDetails?.contentData?.subject}}</div>
-        </div>
-    </div>
-    <div class="four wide column">
-        <div class="sb-field-group">
-            <label class="sb-color-gray-600">{{configService.labelConfig?.lbl?.author}}</label>
-            <div class="fs-0-92">{{contentDetails?.contentData?.author}}</div>
-        </div>
-    </div>
-
-    <div *ngIf="contentDetails?.contentData?.maxScore" class="four wide column">
-        <div class="sb-field-group">
-            <label class="sb-color-gray-600">{{configService.labelConfig?.lbl?.marks}}</label>
-            <div class="fs-0-92">{{contentDetails?.contentData?.maxScore}}</div>
-        </div>
-    </div>
-    <div *ngIf="contentDetails?.contentData?.topic" class="four wide column">
-        <div class="sb-field-group">
-            <label class="sb-color-gray-600">{{configService.labelConfig?.lbl?.topic}}</label>
-            <div class="fs-0-92">{{contentDetails?.contentData?.topic}}</div>
-        </div>
-    </div>
-    <div *ngIf="contentDetails?.contentData?.learningOutcome" class="four wide column">
-        <div class="sb-field-group">
-            <label class="sb-color-gray-600">{{configService.labelConfig?.lbl?.learningOutcome}}</label>
-            <div class="fs-0-92">{{contentDetails?.contentData?.learningOutcome}}</div>
-        </div>
-    </div>
-
-    <div *ngIf="contentDetails?.contentData?.complexityLevel" class="four wide column">
-        <div class="sb-field-group">
-            <label class="sb-color-gray-600">{{configService.labelConfig?.lbl?.complexityLevel}}</label>
-            <div class="fs-0-92">{{contentDetails?.contentData?.complexityLevel}}</div>
-        </div>
-    </div>
-    <div class="four wide column">
-        <div class="sb-field-group">
-            <label class="sb-color-gray-600">{{configService.labelConfig?.lbl?.license}}</label>
-            <div class="fs-0-92">{{contentDetails?.contentData?.license}}</div>
-        </div>
-    </div>
-    <div class="four wide column">
-        <div class="sb-field-group">
-            <label class="sb-color-gray-600">{{configService.labelConfig?.lbl?.copyRightsAndYear}}</label>
-            <div class="fs-0-92">{{contentDetails?.contentData?.copyright}}</div>
-        </div>
-    </div>
+    </ng-container>
 </div>

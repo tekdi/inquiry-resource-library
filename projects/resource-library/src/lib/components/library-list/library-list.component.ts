@@ -11,7 +11,7 @@ import * as _ from 'lodash-es';
     encapsulation: ViewEncapsulation.None,
 })
 export class LibraryListComponent implements OnInit {
-    @Input() contentList;
+    @Input() contentList: any;
     @Input() showAddedContent: any;
     @Output() onChangeEvent = new EventEmitter<any>();
     @Output() moveEvent = new EventEmitter<any>();
@@ -22,6 +22,7 @@ export class LibraryListComponent implements OnInit {
     @Input() libraryLabels;
     public sortContent = false;
     hasMaxQuestionLimit = false;
+    public createdByField;
 
     constructor(public editorService: EditorService, public telemetryService: EditorTelemetryService,
                 public configService: ConfigService, private toasterService: ToasterService) {
@@ -30,6 +31,9 @@ export class LibraryListComponent implements OnInit {
     ngOnInit() {
         if (_.has(this.editorService.editorConfig, 'config.questionSet.maxQuestionsLimit')) {
             this.hasMaxQuestionLimit = true;
+        }
+        if (_.get(this.libraryLabels, 'createdByField')) {
+            this.createdByField = this.libraryLabels.createdByField;
         }
     }
 
