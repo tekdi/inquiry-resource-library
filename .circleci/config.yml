@@ -11,7 +11,7 @@ jobs:
   test-cases:
     working_directory: ~/sunbird-resource-library
     machine:
-      image: ubuntu-2004:202010-01
+      image: default
     steps:
       - checkout:
           path: ~/sunbird-resource-library
