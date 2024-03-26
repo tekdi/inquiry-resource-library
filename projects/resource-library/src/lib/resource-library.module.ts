@@ -3,7 +3,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {CommonFormElementsModule} from '@project-sunbird/common-form-elements-full';
-import {SuiModule} from 'ng2-semantic-ui-v9';
+import {SuiModule} from '@project-sunbird/ng2-semantic-ui';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {HttpClientModule} from '@angular/common/http';
 import {ResourceLibraryComponent} from './resource-library.component';
