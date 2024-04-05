@@ -1,28 +1,23 @@
 version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.4.8
 jobs:
   build:
-    machine:
-      image: circleci/classic:latest
+    working_directory: ~/sunbird-resource-library
+    docker:
+    - image: cimg/node:14.21.3-browsers
     steps:
-      - checkout
+      - browser-tools/install-chrome
       - run:
-          name: run build file
-          command: /bin/bash -x build.sh ${CIRCLE_SHA1} test
-  test-cases:
-    working_directory: ~/sunbird-collection-editor
-    machine:
-      image: ubuntu-1604:202101-01
-    steps:
+          command: google-chrome --version
       - checkout:
-          path: ~/sunbird-collection-editor
+          path: ~/sunbird-resource-library
       - run:
           name: Node version
           command: 'node --version'
       - run:
           name: Installing angular cli
-          command: 'npm install -g @angular/cli@6.0.8 --no-progress'
-      #~ - restore_cache:
-          #~ key: dependency-cache-{{ checksum "package.json" }}
+          command: 'npm install -g @angular/cli@15 --no-progress'
       - run:
           name: Installing npm deps
           command: 'npm install --no-progress'
@@ -40,19 +35,9 @@ jobs:
           command: npm install -g sonarqube-scanner
       - run:
           name: Run sonar scanner
-          command: 'cd ~/sunbird-collection-editor && sonar-scanner'
-      - run:
-          name: Publish to NPM
-          command: |
-            if [ -n $CIRCLE_PR_NUMBER ]; then
-              npm run build-lib && npm pack ./dist/collection-editor-library
-              echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
-              npm publish project-sunbird-sunbird-collection-editor-*
-            else
-              npm run build-lib && npm pack ./dist/collection-editor-library
-            fi
+          command: 'cd ~/sunbird-resource-library && sonar-scanner'
 workflows:
-  version: 2
+  version: 2.1
   build_and_test:
     jobs:
-      - test-cases
+      - build
