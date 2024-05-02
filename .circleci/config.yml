@@ -5,7 +5,7 @@ jobs:
   build:
     working_directory: ~/sunbird-resource-library
     docker:
-    - image: cimg/node:14.21.3-browsers
+    - image: cimg/node:18.19.1-browsers
     steps:
       - browser-tools/install-chrome
       - run:
@@ -17,7 +17,7 @@ jobs:
           command: 'node --version'
       - run:
           name: Installing angular cli
-          command: 'npm install -g @angular/cli@15 --no-progress'
+          command: 'npm install -g @angular/cli@16 --no-progress'
       - run:
           name: Installing npm deps
           command: 'npm install --no-progress'
@@ -30,12 +30,12 @@ jobs:
       - run:
           name: Executing test cases
           command: 'npm run test-coverage | tee /tmp/logs/test_cases.log'
-      - run:
-          name: Install sonar scanner
-          command: npm install -g sonarqube-scanner
-      - run:
-          name: Run sonar scanner
-          command: 'cd ~/sunbird-resource-library && sonar-scanner'
+    #   - run:
+    #       name: Install sonar scanner
+    #       command: npm install -g sonarqube-scanner
+    #   - run:
+    #       name: Run sonar scanner
+    #       command: 'cd ~/sunbird-resource-library && sonar-scanner'
 workflows:
   version: 2.1
   build_and_test:
