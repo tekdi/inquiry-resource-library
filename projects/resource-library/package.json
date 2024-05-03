@@ -1,6 +1,6 @@
 {
   "name": "@project-sunbird/sunbird-resource-library",
-  "version": "8.0.0",
+  "version": "8.0.1",
   "dependencies": {
     "tslib": "^2.0.0"
   },
@@ -9,7 +9,7 @@
     "@angular/core": "^16.2.12",
     "@project-sunbird/common-form-elements-full": "8.0.1",
     "@project-sunbird/ng2-semantic-ui": "8.0.2",
-    "@project-sunbird/sunbird-quml-player-web-component": "4.0.0",
+    "@project-sunbird/sunbird-quml-player-web-component": "4.0.1",
     "@angular/material": "^16.2.14",
     "@angular/cdk": "16.2.14",
     "@project-sunbird/sunbird-pdf-player-web-component": "^1.4.0",
