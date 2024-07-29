@@ -1,6 +1,6 @@
 {
-  "name": "@project-sunbird/sunbird-resource-library",
-  "version": "7.0.4",
+  "name": "@tekdi/sunbird-resource-library",
+  "version": "7.0.0",
   "dependencies": {
     "tslib": "^2.0.0"
   },
@@ -9,14 +9,14 @@
     "@angular/core": "^15.2.2",
     "@project-sunbird/common-form-elements-full": "^6.0.2",
     "ng2-semantic-ui-v9": "0.0.3",
-    "@project-sunbird/sunbird-quml-player": "7.0.4",
+    "@tekdi/sunbird-quml-player": "7.0.0",
     "@angular/material": "^15.2.2",
     "@angular/cdk": "15.2.3",
     "@project-sunbird/sunbird-pdf-player-web-component": "^1.0.1",
     "@project-sunbird/sunbird-video-player-web-component": "^1.0.1"
   },
   "peerDependenciesMeta": {
-    "@project-sunbird/sunbird-quml-player": {
+    "@tekdi/sunbird-quml-player": {
       "optional": true
     },
     "@project-sunbird/sunbird-pdf-player-web-component": {
