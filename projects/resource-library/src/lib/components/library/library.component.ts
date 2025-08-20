@@ -57,6 +57,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
         createdByField: 'board'
     };
     public addContentTelemetryLabel = '';
+    public userSpecificFrameworkField: any;
 
     constructor(public telemetryService: EditorTelemetryService,
                 private editorService: EditorService,
@@ -79,6 +80,7 @@ export class LibraryComponent implements OnInit, AfterViewInit, OnDestroy {
         this.collectionData = _.get(this.libraryInput, 'collection');
         this.searchFormConfig = _.get(this.libraryInput, 'searchFormConfig', []);
         this.metadataFormConfig = _.get(this.libraryInput, 'metadataFormConfig', metadataDefaultConfig);
+        this.userSpecificFrameworkField =  _.get(this.libraryInput, 'userSpecificFrameworkField');
         this.editorService.fetchCollectionHierarchy(this.collectionId).subscribe((response: any) => {
             this.collectionhierarcyData = response.result.question || response.result.questionset || response.result.content;
             this.collectionHierarchy = this.getUnitWithChildren(this.collectionhierarcyData, this.collectionId);

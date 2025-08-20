@@ -5,7 +5,7 @@ import { TelemetryInteractDirective } from '../../directives/telemetry-interact/
 import { EditorTelemetryService } from '../../services/telemetry/telemetry.service';
 import { Router } from '@angular/router';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { SuiModule } from 'ng2-semantic-ui-v9';
+import { SuiModule } from '@project-sunbird/ng2-semantic-ui';
 import * as $ from 'jquery';
 import 'jquery.fancytree';
 import { EditorService } from '../../services/editor/editor.service';

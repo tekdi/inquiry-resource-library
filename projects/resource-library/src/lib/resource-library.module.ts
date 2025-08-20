@@ -3,7 +3,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {CommonFormElementsModule} from '@project-sunbird/common-form-elements-full';
-import {SuiModule} from 'ng2-semantic-ui-v9';
+import {SuiModule} from '@project-sunbird/ng2-semantic-ui';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {HttpClientModule} from '@angular/common/http';
 import {ResourceLibraryComponent} from './resource-library.component';
@@ -16,8 +16,6 @@ import {SkeletonLoaderComponent} from './components/skeleton-loader/skeleton-loa
 import {TelemetryInteractDirective} from './directives/telemetry-interact/telemetry-interact.directive';
 import {QumlPlayerComponent} from './components/quml-player/quml-player.component';
 import { InterpolatePipe } from './pipes/interpolate/interpolate.pipe';
-import {QumlLibraryModule} from '@project-sunbird/sunbird-quml-player';
-import {CarouselModule} from 'ngx-bootstrap/carousel';
 @NgModule({
     declarations: [
         ResourceLibraryComponent, ContentPlayerPageComponent,
@@ -27,7 +25,7 @@ import {CarouselModule} from 'ngx-bootstrap/carousel';
     ],
     imports: [
         CommonModule, FormsModule, ReactiveFormsModule, RouterModule.forChild([]), SuiModule,
-        CommonFormElementsModule, InfiniteScrollModule, HttpClientModule, QumlLibraryModule, CarouselModule
+        CommonFormElementsModule, InfiniteScrollModule, HttpClientModule
     ],
     providers: [
     ],

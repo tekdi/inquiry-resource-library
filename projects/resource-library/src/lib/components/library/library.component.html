@@ -21,7 +21,7 @@
   </div>
 <!-- Filter -->
   <lib-library-filter *ngIf="!showLoader && searchFormConfig.length" [filterValues]="defaultFilters" [searchFormConfig]="searchFormConfig"
-  [filterOpenStatus]="isFilterOpen" [frameworkId]="frameworkId" [targetPrimaryCategories]="targetPrimaryCategories"
+  [filterOpenStatus]="isFilterOpen" [frameworkId]="frameworkId" [targetPrimaryCategories]="targetPrimaryCategories" [userSpecificFrameworkField]="userSpecificFrameworkField"
   (filterChangeEvent)="onFilterChange($event);">
   </lib-library-filter>
   <div class="ui container sb-container min-h-500 mb-30" *ngIf="!showLoader && showListing && contentList?.length">

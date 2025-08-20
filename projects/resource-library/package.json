@@ -1,22 +1,22 @@
 {
-  "name": "@project-sunbird/sunbird-resource-library",
-  "version": "7.0.4",
+  "name": "@tekdi/sunbird-resource-library",
+  "version": "9.0.0-beta.6",
   "dependencies": {
     "tslib": "^2.0.0"
   },
   "peerDependencies": {
-    "@angular/common": "^15.2.2",
-    "@angular/core": "^15.2.2",
-    "@project-sunbird/common-form-elements-full": "^6.0.2",
-    "ng2-semantic-ui-v9": "0.0.3",
-    "@project-sunbird/sunbird-quml-player": "7.0.4",
-    "@angular/material": "^15.2.2",
-    "@angular/cdk": "15.2.3",
-    "@project-sunbird/sunbird-pdf-player-web-component": "^1.0.1",
-    "@project-sunbird/sunbird-video-player-web-component": "^1.0.1"
+    "@angular/common": "^16.2.12",
+    "@angular/core": "^16.2.12",
+    "@project-sunbird/common-form-elements-full": "8.0.1",
+    "@project-sunbird/ng2-semantic-ui": "8.0.2",
+    "@tekdi/sunbird-quml-player-web-component": "5.0.0-beta.6",
+    "@angular/material": "^16.2.14",
+    "@angular/cdk": "16.2.14",
+    "@project-sunbird/sunbird-pdf-player-web-component": "^1.4.0",
+    "@project-sunbird/sunbird-video-player-web-component": "^1.2.5"
   },
   "peerDependenciesMeta": {
-    "@project-sunbird/sunbird-quml-player": {
+    "@tekdi/sunbird-quml-player-web-component": {
       "optional": true
     },
     "@project-sunbird/sunbird-pdf-player-web-component": {

@@ -21,6 +21,7 @@ export class LibraryFilterComponent implements OnInit, OnChanges {
   @Input() searchFormConfig: any;
   @Input() frameworkId: any;
   @Input() targetPrimaryCategories;
+  @Input() userSpecificFrameworkField: any;
   @Output() filterChangeEvent: EventEmitter<any> = new EventEmitter();
   public filterConfig: any;
   public isFilterShow = false;
@@ -62,8 +63,24 @@ export class LibraryFilterComponent implements OnInit, OnChanges {
       take(1)
     ).subscribe((frameworkDetails: any) => {
       if (frameworkDetails && !frameworkDetails.err) {
-        const frameworkData = frameworkDetails.frameworkdata[this.frameworkId].categories;
+        let frameworkData = frameworkDetails.frameworkdata[this.frameworkId].categories;
+
+          // This is added to handled SCP CCTA and SCTA User for Pratham
+          if (!_.isEmpty(this.userSpecificFrameworkField.value) && !_.isUndefined(this.userSpecificFrameworkField.value)) {
+            let filteredFrameworks:any = [];
+            filteredFrameworks = _.cloneDeep(frameworkData);
+            filteredFrameworks.forEach(framework => {
+              if (framework.code === this.userSpecificFrameworkField.code) {
+                framework.terms = framework.terms.filter(term =>
+                  this.userSpecificFrameworkField.value.includes(term.name)
+                );
+              }
+            });
+            frameworkData = filteredFrameworks;
+          }
+
         this.frameworkDetails.frameworkData = frameworkData;
+        console.log('res lib frameworkData ===>', this.frameworkDetails.frameworkData)
         this.frameworkDetails.topicList = _.get(_.find(frameworkData, {
           code: 'topic'
         }), 'terms');
